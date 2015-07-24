@@ -2,7 +2,7 @@
 .load_conf <- function(x, check, verbose,...){
 
 	if(!file.exists(x)){
-		message(error("no.conf"), x)
+		message("Configuration file does not exist, loading skipped. Expecting a file at:", x)
 		return()
 	}
 	conf <- read_sheet(x, allowEscape = TRUE, header = FALSE, verbose = verbose)

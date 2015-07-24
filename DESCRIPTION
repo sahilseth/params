@@ -8,6 +8,8 @@ Depends:
     whisker
 Imports:
     knitr
+Suggests:
+   openxlsx
 VignetteBuilder: knitr
 URL: https://github.com/sahilseth/params
 BugReports: https://github.com/sahilseth/params/issues
