@@ -4,6 +4,10 @@ output:
     keep_md: yes
 ---
 
+[![Build Status](https://travis-ci.org/sahilseth/params.png)](https://travis-ci.org/sahilseth/params)
+[![Coverage Status](https://img.shields.io/coveralls/sahilseth/params.svg)](https://coveralls.io/r/sahilseth/params?branch=master)
+
+
 A package level alternative for `options` and `getOptions`, to prevent cluterring the space. 
 
 - ability to store all default options as a tab delimited table

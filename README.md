@@ -1,4 +1,5 @@
 
+
 A package level alternative for `options` and `getOptions`, to prevent cluterring the space. 
 
 - ability to store all default options as a tab delimited table
