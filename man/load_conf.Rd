@@ -16,12 +16,12 @@ load_conf(x, check = TRUE, verbose = TRUE, ...)
 \item{...}{Not used}
 }
 \description{
-These are two column tab seperated files (namely name and value).
+Read a tab delimted file and load them as options using \link{set_opts}
 }
 \details{
 params ending in: "path$|dir$|exe$" are checked in case of check=TRUE.
 }
 \seealso{
-\link{get_opts}
+\link{get_opts} \link{set_opts} \link{print.opts} \link{read_sheet}
 }
 

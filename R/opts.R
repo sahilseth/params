@@ -1,25 +1,11 @@
+
 #' @export
 opts = new.env()
 
-#' @rdname opts
-#'
-#' @title Setting/loading and extracting various options into the environment
-#' @description
-#' load_conf:
-#' This function extracts the options set by functions like set_opts/load_conf
-#' @aliases get_opts set_opts print.opts
-#'
-#' @param x get_opts(): a character vector of names of options to extract.
-#' set_opts(): a named list with all the options to be set.
-#' @param envir environ used to store objects
-#' @param ... not used
-#'
-#' @seealso \link{load_conf}
+
+
+#' @rdname params
 #' @export
-#' @importFrom knitr kable
-#' @examples
-#' get_opts()
-#' get_opts("flow_run_path")
 get_opts = function(x, envir = opts){
 	if(missing(x))
 		x = ls(envir)
@@ -33,12 +19,7 @@ get_opts = function(x, envir = opts){
 }
 
 
-#' @rdname opts
-#'
-#' @examples
-#' ## set _opts
-#' set_opts(list(flow_run_path = "~/mypath"))
-#'
+#' @rdname params
 #' @export
 set_opts = function(x, envir = opts){
 
@@ -51,12 +32,8 @@ set_opts = function(x, envir = opts){
 }
 
 
-#' @rdname opts
-#' @description print pkg options as a pretty table
-#'
+#' @rdname params
 #' @importFrom knitr kable
-#'
-#' @details In case of print.opts(), param ... is passed onto print.
 #' @export
 print.opts <- function(x, ...){
 	if(length(x) > 1){
@@ -71,3 +48,35 @@ print.opts <- function(x, ...){
 	else(print.default(x, ...))
 }
 
+
+#' @aliases get_opts set_opts print.opts
+#' @title Setting/loading and extracting various options into the environment
+#'
+#' @description
+#' \itemize{
+#' \item set_opts(): set options into a custom envir
+#' \item get_opts()/params(): extract options
+#' \item print.opts(): print pkg options as a pretty table
+#'}
+#'
+#' @param x \itemize{
+#' \item get_opts(): a character vector of names of options to extract.
+#' \item set_opts(): a named list with all the options to be set.
+#' }
+#' @param envir environ used to store objects
+#' @param ... In case of \link{print.opts}, is passed into \link{print}
+#'
+#' @details
+#' To use params in your package, follow this these steps: \url{https://github.com/sahilseth/params}
+#'
+#' @seealso \link{read_sheet} \link{load_conf}
+#' @export
+#' @examples
+#' ## set _opts
+#' opts = set_opts(list(flow_run_path = "~/mypath"))
+#' print(opts)
+#' ## get_opts()
+#' get_opts()
+#' get_opts("flow_run_path")
+#'
+params = get_opts
