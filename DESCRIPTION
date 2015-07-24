@@ -1,0 +1,16 @@
+Package: params
+Type: Package
+Title: Simplify paramters
+Description: An interface to simplify package paramters
+Version: 0.1
+Date: 2015-07-10
+Depends:
+    whisker
+Imports:
+    knitr
+VignetteBuilder: knitr
+URL: https://github.com/sahilseth/params
+BugReports: https://github.com/sahilseth/params/issues
+Authors@R: c(person("Sahil", "Seth", role = c("aut", "cre"), email =
+    "me@sahilseth.com"))
+License: GPL-2
