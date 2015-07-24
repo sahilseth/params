@@ -1,4 +1,7 @@
 
+[![Build Status](https://travis-ci.org/sahilseth/params.png)](https://travis-ci.org/sahilseth/params)
+[![Coverage Status](https://img.shields.io/coveralls/sahilseth/params.svg)](https://coveralls.io/r/sahilseth/params?branch=master)
+
 
 A package level alternative for `options` and `getOptions`, to prevent cluterring the space. 
 
@@ -55,10 +58,10 @@ Reading file, using 'V1' as id_column to remove empty rows.
 Warning in chk_conf(lst): 
 
 Seems like these paths do not exist, this may cause issues later:
-name          value    
-------------  ---------
-my_tool_exe   tool_exe 
-my_dir        dir_exe  
+name          value            
+------------  -----------------
+my_tool_exe   /usr/bin/ls      
+my_dir        path/to/a/folder 
 ```
 
 #### load the config file in silence
@@ -70,13 +73,13 @@ print(opts) ## print opts as a pretty table
 
 ```
 
-                             
---------------  -------------
-my_path         ~/flowr      
-my_tool_exe     tool_exe     
-my_dir          dir_exe      
-my_conf_path    ~/flowr/conf 
-default_regex   (.*)         
+                                 
+--------------  -----------------
+my_path         ~/flowr          
+my_tool_exe     /usr/bin/ls      
+my_dir          path/to/a/folder 
+my_conf_path    ~/flowr/conf     
+default_regex   (.*)             
 ```
 
 #### Show all options
@@ -89,15 +92,15 @@ get_opts()
 
 ```
 
-                               
---------------  ---------------
-default_regex   (.*)           
-my_conf_path    ~/flowr/conf   
-my_dir          dir_exe        
-my_path         ~/flowr        
-my_tool_exe     tool_exe       
-regex           (.*)-[ATGC]{1} 
-verbose         TRUE           
+                                 
+--------------  -----------------
+default_regex   (.*)             
+my_conf_path    ~/flowr/conf     
+my_dir          path/to/a/folder 
+my_path         ~/flowr          
+my_tool_exe     /usr/bin/ls      
+regex           (.*)-[ATGC]{1}   
+verbose         TRUE             
 ```
 
 
@@ -113,18 +116,17 @@ verbose         TRUE
 
 ## options ending with path, exe or dir are checked for existence. file.exists
 my_path	~/flowr
-my_tool_exe	tool_exe
-my_dir	dir_exe
+my_tool_exe	/usr/bin/ls
+my_dir	path/to/a/folder
 
 
 ## you can define nested options
 ## these are parsed line by line
+
 my_conf_path	{{{my_path}}}/conf
 
-default_regex	(.*)
-
-
 ## --- all options are parsed as chracter
+default_regex	(.*)
 ```
 
 

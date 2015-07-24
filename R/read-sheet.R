@@ -34,15 +34,18 @@ read_sheet <- function(x, id_column, start_row = 1, sheet = "sample_sheet", ext,
 				call. = FALSE)
 		}
 		mat <- read.xlsx(x, sheet = sheet, startRow = start_row, ...)
+		message("Removing extra columns")
+		mat = mat[,!grepl("^X", colnames(mat))]
 	}
 	else{
 		cat("Sorry we do not recognize this file format", ext, "please use tsv, csv or xlsx2 (sheetname: sample_sheet)")
 	}
 	### ------ remove blank rows and columns
-	if(missing(id_column) & verbose) {
+	if(missing(id_column)) {
 		id_column = 1
-		message("Reading file, using '", colnames(mat)[id_column], "' as id_column to remove empty rows.");
+		if(verbose)
+			message("Reading file, using '", colnames(mat)[id_column], "' as id_column to remove empty rows.")
 	}
-	mat <- mat[!mat[, id_column] %in% c("", NA), !grepl("^X", colnames(mat))]
+	mat <- mat[!mat[, id_column] %in% c("", NA), ]
 	return(mat)
 }
