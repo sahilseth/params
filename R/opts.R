@@ -7,7 +7,7 @@ opts = new.env()
 #' @description
 #' load_conf:
 #' This function extracts the options set by functions like set_opts/load_conf
-#' @aliases flow_opts ngsflows_opts get_opts set_opts print.opts
+#' @aliases get_opts set_opts print.opts
 #'
 #' @param x get_opts(): a character vector of names of options to extract.
 #' set_opts(): a named list with all the options to be set.
@@ -18,12 +18,11 @@ opts = new.env()
 #' @export
 #' @importFrom knitr kable
 #' @examples
-#' ## Prints all the default options set via flowr.conf
 #' get_opts()
 #' get_opts("flow_run_path")
 get_opts = function(x, envir = opts){
 	if(missing(x))
-		x = ls(flow_opts)
+		x = ls(envir)
 	out = mget(x, envir = envir, ifnotfound = list(NULL))
 	if(length(x) == 1){
 		out = unlist(out)
@@ -69,6 +68,6 @@ print.opts <- function(x, ...){
 		## following does not handle null values well
 		# print(kable(t(as.data.frame(x, row.names = names(x)))))
 	}
-	else(print.default(y, ...))
+	else(print.default(x, ...))
 }
 

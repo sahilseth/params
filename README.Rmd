@@ -1,0 +1,93 @@
+---
+output: 
+  html_document: 
+    keep_md: yes
+---
+
+A package level alternative for `options` and `getOptions`, to prevent cluterring the space. 
+
+- ability to store all default options as a tab delimited table
+- automatically check if file.path exists for options relating to files.
+- fetch multiple options as list
+- print options as a pretty table
+
+
+### Installation
+
+```{r eval=FALSE}
+install.packages("params")
+devtools::install_github("sahilseth/params")
+```
+
+
+#### Simple options
+
+```{r message=FALSE, comment=""}
+library(params)
+set_opts(list(verbose = TRUE, 
+	my_dir = "~/mypath",
+	regex = "(.*)-[ATGC]{1}"))
+get_opts("my_dir") ## extract options
+```
+
+
+#### example conf file
+
+```{r}
+conf = system.file("conf/params.conf", package = "params")
+```
+
+#### load the config file
+```{r comment=""}
+load_conf(conf)
+```
+
+#### load the config file in silence
+```{r comment=""}
+opts = load_conf(conf, check = FALSE, verbose = FALSE)
+print(opts) ## print opts as a pretty table
+```
+
+#### Show all options
+- notice how `my_conf_path` autocompleted {{{my_path}}}, getting its value from previous lines
+
+```{r comment=""}
+get_opts() 
+```
+
+
+**Here is what the original file looks like**:
+```{r,comment="", echo=FALSE}
+cat(paste(readLines(conf), collapse = "\n"))
+```
+
+
+#### Using params in your own package
+
+params creates a environment object and stores all parameters in that object. If there are multiple packages loaded, which are using params, they 
+may override each other's options, clutering the space the same way as options(). Alternatively, one may create a `env` for a package.
+
+
+If you would like to use params in your R packages, use the following lines
+
+```{r}
+## Create a R file in your package, and put the following lines in it
+
+#' @export
+mypkg_opts = new.env()
+
+#' @importFrom params get_opts
+get_opts <- function(x){
+	params::get_opts(x, envir = mypkg_opts)
+}
+
+#' @importFrom params set_opts
+set_opts <- function(x){
+	params::set_opts(x, envir = mypkg_opts)
+}
+```
+
+
+Also, you would need to add `params` to the depends field in the `DESCRIPTION` file.
+
+

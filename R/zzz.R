@@ -1,5 +1,4 @@
 .onAttach <- function(lib, pkg){
-	packageStartupMessage("Flowr: streamlining workflows")
 }
 
 .onDeatch <- function(lib, pkg) {
@@ -11,5 +10,5 @@
 
 .onLoad <- function(lib, pkg){
 	fls = system.file("conf/params.conf", package = "params")
-	#suppressMessages(load_conf(fls, check = FALSE))
+	suppressMessages(load_conf(fls, check = FALSE))
 }

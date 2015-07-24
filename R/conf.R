@@ -40,8 +40,10 @@ load_conf <- function(x, check = TRUE, verbose = TRUE, ...){
 	## .load_conf: works on a single file
 	lst <- lapply(x, .load_conf, check = check, verbose = verbose, ...)
 
-	## in future this could be a normalized list
-	## with the final set of options used
+	## only one conf file is read
+	if(length(x) == 1)
+		lst = lst[[1]]
+
 	invisible(lst)
 }
 
