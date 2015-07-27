@@ -9,21 +9,20 @@
 \usage{
 get_opts(x, envir = opts)
 
-set_opts(x, envir = opts)
+set_opts(..., .dots, envir = opts)
 
 \method{print}{opts}(x, ...)
 
 params(x, envir = opts)
 }
 \arguments{
-\item{x}{\itemize{
-\item get_opts(): a character vector of names of options to extract.
-\item set_opts(): a named list with all the options to be set.
-}}
+\item{x}{a character vector of names of options to extract.}
 
 \item{envir}{environ used to store objects}
 
-\item{...}{In case of \link{print.opts}, is passed into \link{print}}
+\item{...}{set_opts(): a named set of variable/value pairs seperated by comma}
+
+\item{.dots}{set_opts(): A named list, as a alternative to ...}
 }
 \description{
 \itemize{
@@ -37,7 +36,9 @@ To use params in your package, follow this these steps: \url{https://github.com/
 }
 \examples{
 ## set _opts
-opts = set_opts(list(flow_run_path = "~/mypath"))
+opts = set_opts(flow_run_path = "~/mypath")
+#OR
+opts = set_opts(.dots = list(flow_run_path = "~/mypath"))
 print(opts)
 ## get_opts()
 get_opts()

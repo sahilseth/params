@@ -16,7 +16,7 @@
 	if(check)
 		chk_conf(lst)
 	options(lst)
-	set_opts(lst)
+	set_opts(.dots = lst)
 	#opts()$set(lst)
 	## -- populate these in the global environment
 	invisible(get_opts(names(lst)))

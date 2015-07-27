@@ -1,8 +1,9 @@
 Package: params
 Type: Package
-Title: Simplify paramters
-Description: An interface to simplify package paramters
-Version: 0.1
+Title: Simplify Parameters
+Description: An interface to simplify organizing parameters used in a package, using external configuration files.
+	This attempts to provide a cleaner alternative to options().
+Version: 0.2
 Date: 2015-07-10
 Depends:
     whisker
@@ -10,7 +11,6 @@ Imports:
     knitr
 Suggests:
    openxlsx
-VignetteBuilder: knitr
 URL: https://github.com/sahilseth/params
 BugReports: https://github.com/sahilseth/params/issues
 Authors@R: c(person("Sahil", "Seth", role = c("aut", "cre"), email =

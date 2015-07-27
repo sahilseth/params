@@ -4,8 +4,8 @@
 \alias{read_sheet}
 \title{read_sheet}
 \usage{
-read_sheet(x, id_column, start_row = 1, sheet = "sample_sheet", ext,
-  header = TRUE, verbose = FALSE, ...)
+read_sheet(x, id_column, start_row = 1, sheet = 1, ext, header = TRUE,
+  verbose = FALSE, ...)
 }
 \arguments{
 \item{x}{path to a file, to be read}
@@ -14,7 +14,7 @@ read_sheet(x, id_column, start_row = 1, sheet = "sample_sheet", ext,
 
 \item{start_row}{supplied to read.xlsx}
 
-\item{sheet}{supplied to read.xlsx}
+\item{sheet}{supplied to read.xlsx, index or name of the sheet to be read from excel file}
 
 \item{ext}{determined using file extention. Specifying will override}
 

@@ -23,13 +23,15 @@ get_opts = function(x, envir = opts){
 
 #' @rdname params
 #' @export
-set_opts = function(x, envir = opts){
+set_opts = function(..., .dots, envir = opts){
 
+	if(missing(.dots))
+		.dots = list(...)
 	## should be a named list
-	stopifnot(is.list(x))
-	stopifnot(!is.null(names(x)))
+	stopifnot(is.list(.dots))
+	stopifnot(!is.null(names(.dots)))
 
-	list2env(x, envir = envir)
+	list2env(.dots, envir = envir)
 	invisible()
 }
 
@@ -61,12 +63,10 @@ print.opts <- function(x, ...){
 #' \item print.opts(): print pkg options as a pretty table
 #'}
 #'
-#' @param x \itemize{
-#' \item get_opts(): a character vector of names of options to extract.
-#' \item set_opts(): a named list with all the options to be set.
-#' }
+#' @param x a character vector of names of options to extract.
+#' @param ... set_opts(): a named set of variable/value pairs seperated by comma
+#' @param .dots set_opts(): A named list, as a alternative to ...
 #' @param envir environ used to store objects
-#' @param ... In case of \link{print.opts}, is passed into \link{print}
 #'
 #' @details
 #' To use params in your package, follow this these steps: \url{https://github.com/sahilseth/params}
@@ -75,7 +75,9 @@ print.opts <- function(x, ...){
 #' @export
 #' @examples
 #' ## set _opts
-#' opts = set_opts(list(flow_run_path = "~/mypath"))
+#' opts = set_opts(flow_run_path = "~/mypath")
+#' #OR
+#' opts = set_opts(.dots = list(flow_run_path = "~/mypath"))
 #' print(opts)
 #' ## get_opts()
 #' get_opts()

@@ -1,6 +1,5 @@
 
 [![Build Status](https://travis-ci.org/sahilseth/params.png)](https://travis-ci.org/sahilseth/params)
-[![Coverage Status](https://img.shields.io/coveralls/sahilseth/params.svg)](https://coveralls.io/r/sahilseth/params?branch=master)
 
 
 A package level alternative for `options` and `getOptions`, to prevent cluterring the space. 
@@ -151,8 +150,8 @@ get_opts <- function(x){
 }
 
 #' @importFrom params set_opts
-set_opts <- function(x){
-	params::set_opts(x, envir = mypkg_opts)
+set_opts <- function(..., .dots){
+	params::set_opts(..., .dots, envir = mypkg_opts)
 }
 ```
 
