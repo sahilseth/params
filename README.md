@@ -141,18 +141,26 @@ If you would like to use params in your R packages, use the following lines
 ```r
 ## Create a R file in your package, and put the following lines in it
 
-#' @export
-mypkg_opts = new.env()
+
+
+flowr_opts = new.env()
 
 #' @importFrom params get_opts
 get_opts <- function(x){
-	params::get_opts(x, envir = mypkg_opts)
+	params::get_opts(x, envir = flowr_opts)
 }
 
 #' @importFrom params set_opts
 set_opts <- function(..., .dots){
-	params::set_opts(..., .dots, envir = mypkg_opts)
+	params::set_opts(..., .dots = .dots, envir = flowr_opts)
 }
+
+#' @importFrom params set_opts
+load_conf <- function(...){
+	params::load_conf(..., envir = flowr_opts)
+}
+
+
 ```
 
 

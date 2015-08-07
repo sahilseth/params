@@ -1,8 +1,12 @@
 
 
 
-
+#' default opts
 opts = new.env()
+
+get_opt_env <- function(){
+	return(opts)
+}
 
 
 
@@ -22,14 +26,29 @@ get_opts = function(x, envir = opts){
 
 
 #' @rdname params
+#'
+#' @importFrom tools assertCondition
+#'
 #' @export
 set_opts = function(..., .dots, envir = opts){
 
+	dots = list(...)
+
+	msg = "any options can be defined, using name = value OR as a list supplied to .dots"
+
+	if(!missing(.dots) & (length(dots) > 0))
+		stop(msg)
+
 	if(missing(.dots))
-		.dots = list(...)
-	## should be a named list
+		.dots <- dots
+
+	if(length(.dots) == 0)
+		stop("seems no params were supplied using name=value OR as a named list")
+
+	if(is.null(names(.dots)))
+		stop("the elements of the list should be named OR supply params using name = value")
+
 	stopifnot(is.list(.dots))
-	stopifnot(!is.null(names(.dots)))
 
 	list2env(.dots, envir = envir)
 	invisible()
@@ -45,7 +64,8 @@ print.opts <- function(x, ...){
 		y = cbind(lapply(x, function(f) {
 			unlist(as.data.frame(Filter(Negate(is.null), f)))
 		}))
-		print(kable(y, col.names = c("")), ...)
+		y = data.frame(name = rownames(y), value = unlist(y[,1]))
+		print(kable(y, row.names = FALSE), ...)
 		## following does not handle null values well
 		# print(kable(t(as.data.frame(x, row.names = names(x)))))
 	}
@@ -53,8 +73,10 @@ print.opts <- function(x, ...){
 }
 
 
-#' @aliases get_opts set_opts print.opts
+#' @rdname params
 #' @title Setting/loading and extracting various options into the environment
+#'
+#' @aliases get_opts set_opts print.opts
 #'
 #' @description
 #' \itemize{

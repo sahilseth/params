@@ -15,6 +15,7 @@
 #' If id_column is missing, default if first column
 
 #' @importFrom tools file_ext
+#' @importFrom utils read.table
 #'
 #'
 #' @export
