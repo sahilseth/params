@@ -3,8 +3,8 @@ Type: Package
 Title: Simplify Parameters
 Description: An interface to simplify organizing parameters used in a package, using external configuration files.
 	This attempts to provide a cleaner alternative to options().
-Version: 0.2.3
-Date: 2015-08-07
+Version: 0.2.4
+Date: 2015-08-13
 Depends:
     whisker
 Imports:

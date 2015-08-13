@@ -10,5 +10,5 @@
 
 .onLoad <- function(lib, pkg){
 	fls = system.file("conf/params.conf", package = "params")
-	suppressMessages(load_conf(fls, check = FALSE))
+	suppressMessages(load_opts(fls, check = FALSE))
 }

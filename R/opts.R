@@ -51,7 +51,8 @@ set_opts = function(..., .dots, envir = opts){
 	stopifnot(is.list(.dots))
 
 	list2env(.dots, envir = envir)
-	invisible()
+
+	invisible(get_opts(names(.dots), envir = envir))
 }
 
 
@@ -73,36 +74,4 @@ print.opts <- function(x, ...){
 }
 
 
-#' @rdname params
-#' @title Setting/loading and extracting various options into the environment
-#'
-#' @aliases get_opts set_opts print.opts
-#'
-#' @description
-#' \itemize{
-#' \item set_opts(): set options into a custom envir
-#' \item get_opts()/params(): extract options
-#' \item print.opts(): print pkg options as a pretty table
-#'}
-#'
-#' @param x a character vector of names of options to extract.
-#' @param ... set_opts(): a named set of variable/value pairs seperated by comma
-#' @param .dots set_opts(): A named list, as a alternative to ...
-#' @param envir environ used to store objects
-#'
-#' @details
-#' To use params in your package, follow this these steps: \url{https://github.com/sahilseth/params}
-#'
-#' @seealso \link{read_sheet} \link{load_conf}
-#' @export
-#' @examples
-#' ## set _opts
-#' opts = set_opts(flow_run_path = "~/mypath")
-#' #OR
-#' opts = set_opts(.dots = list(flow_run_path = "~/mypath"))
-#' print(opts)
-#' ## get_opts()
-#' get_opts()
-#' get_opts("flow_run_path")
-#'
-params = get_opts
+

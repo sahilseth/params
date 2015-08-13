@@ -2,6 +2,7 @@ p a r a m s    0.2.3    2015/08/07
 ------------------------------------------------
 - set_opts: enhanced error reporting
 - print.opts: handles older versions of kable (a knitr function).
+- renamed load_conf to load_opts, to make all function names consistent.
 
 p a r a m s    0.2.2    2015/07/28
 ------------------------------------------------
