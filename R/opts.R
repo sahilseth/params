@@ -57,7 +57,6 @@ set_opts = function(..., .dots, envir = opts){
 
 
 #' @rdname params
-#' @importFrom knitr kable
 #' @export
 print.opts <- function(x, ...){
 	if(length(x) > 1){

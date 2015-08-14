@@ -3,17 +3,19 @@ Type: Package
 Title: Simplify Parameters
 Description: An interface to simplify organizing parameters used in a package, using external configuration files.
 	This attempts to provide a cleaner alternative to options().
-Version: 0.2.4
-Date: 2015-08-13
+Version: 0.2.5
+Date: 2015-08-14
 Depends:
     whisker
 Imports:
-    knitr,
+    highr,
     utils
 Suggests:
    openxlsx
 URL: https://github.com/sahilseth/params
 BugReports: https://github.com/sahilseth/params/issues
-Authors@R: c(person("Sahil", "Seth", role = c("aut", "cre"), email =
-    "me@sahilseth.com"))
+Authors@R: c(
+		person("Sahil", "Seth", role = c("aut", "cre"), email = "me@sahilseth.com"),
+    person("Yihui", "Xie", role = c("ctb"), comment = "kable from knitr R/table.R")
+		)
 License: GPL-2
