@@ -23,7 +23,8 @@
 #' @param .dots set_opts(): A named list, as a alternative to ...
 #' @param envir environ used to store objects
 #' @param check load_opts(): in case of a configuration file, whether to check if files defined in parameters exists..
-#' @param verbose load_opts()be chatty ?
+#' @param .parse set_opts(), load_opts(): logical, whether to auto-complete {{{}}} using previous opts
+#' @param verbose load_opts() be chatty ?
 
 #' @details
 #'

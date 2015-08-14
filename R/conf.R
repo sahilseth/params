@@ -1,7 +1,7 @@
 
 
 #' @export
-.load_opts <- function(x, check, envir, verbose,...){
+.load_opts <- function(x, check, envir, verbose, .parse, ...){
 
 	if(!file.exists(x)){
 		message("Configuration file does not exist, loading skipped. Expecting a file at:", x)
@@ -12,7 +12,8 @@
 	lst = as.list(conf$value)
 	names(lst) = conf$name
 
-	lst = parse_opts(lst)
+	if(.parse)
+		lst = parse_opts(lst)
 
 	## -- check the ones with file paths
 	if(check)
@@ -27,13 +28,13 @@
 #' @rdname params
 #' @seealso \link{read_sheet}
 #' @export
-load_opts <- function(x, check = TRUE, envir = opts, verbose = TRUE, ...){
+load_opts <- function(x, check = TRUE, envir = opts, verbose = TRUE, .parse = TRUE, ...){
 
 	if(missing(x))
 		stop("Please supply path to a file to load as x")
 
 	## .load_opts: works on a single file
-	lst <- lapply(x, .load_opts, check = check, envir = envir, verbose = verbose,  ...)
+	lst <- lapply(x, .load_opts, check = check, envir = envir, .parse = .parse, verbose = verbose,  ...)
 
 	## only one conf file is read
 	if(length(x) == 1)

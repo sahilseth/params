@@ -97,7 +97,7 @@ The above object provides three functions to load, set and fetch params:
 - myopts$load()
 
 
-
+-
 
 **Here is a example con file:**:
 

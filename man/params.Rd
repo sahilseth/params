@@ -9,7 +9,8 @@
 \alias{set_opts}
 \title{Setting/loading and extracting various options into the environment}
 \usage{
-load_opts(x, check = TRUE, envir = opts, verbose = TRUE, ...)
+load_opts(x, check = TRUE, envir = opts, verbose = TRUE, .parse = TRUE,
+  ...)
 
 get_opts(x, envir = opts)
 
@@ -29,7 +30,9 @@ new_opts(envir = new.env())
 
 \item{envir}{environ used to store objects}
 
-\item{verbose}{load_opts()be chatty ?}
+\item{verbose}{load_opts() be chatty ?}
+
+\item{.parse}{set_opts(), load_opts(): logical, whether to auto-complete {{{}}} using previous opts}
 
 \item{...}{set_opts(): a named set of variable/value pairs seperated by comma}
 
