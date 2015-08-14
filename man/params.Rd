@@ -13,7 +13,7 @@ load_opts(x, check = TRUE, envir = opts, verbose = TRUE, ...)
 
 get_opts(x, envir = opts)
 
-set_opts(..., .dots, envir = opts)
+set_opts(..., .dots, .parse = TRUE, envir = opts)
 
 \method{print}{opts}(x, ...)
 

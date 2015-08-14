@@ -2,7 +2,10 @@
 [![Build Status](https://travis-ci.org/sahilseth/params.png)](https://travis-ci.org/sahilseth/params)
 
 
-A package level alternative for `options` and `getOptions`, to prevent cluterring the space. 
+## Rationale
+ > Setting/loading and extracting various options into the environment
+
+> A package level alternative for `options` and `getOptions`, to prevent cluterring the space. 
 
 - ability to store all default options as a tab delimited table
 - automatically check if file.path exists for options relating to files.
@@ -10,100 +13,93 @@ A package level alternative for `options` and `getOptions`, to prevent cluterrin
 - print options as a pretty table
 
 
-### Installation
+## Main functions
+
+- set_opts(): set options into a custom envir
+- get_opts(): extract options
+- load_opts(): Read a tab/comma delimted file using read_sheet and load them as options using set_opts
+- new_opts(): create a options manager to be included in a pacakge
+- print.opts(): print pkg options as a pretty table
 
 
-```r
-install.packages("params")
-devtools::install_github("sahilseth/params")
+
+## Setting up some options
+
+
 ```
-
-
-#### Simple options
-
-
-```r
 library(params)
-set_opts(list(verbose = TRUE, 
-	my_dir = "~/mypath",
-	regex = "(.*)-[ATGC]{1}"))
-get_opts("my_dir") ## extract options
+set_opts(
+	name = "Sahil",
+	verbose = TRUE, 
+	my_dir = "~/mypath")
+get_opts()	
 ```
 
+get_opts, shows all available options:
+
+name            value        
+--------------  -------------
+default_regex   (.*)         
+my_conf_path    ~/flowr/conf 
+my_dir          ~/mypath     
+my_path         ~/flowr      
+my_tool_exe     /usr/bin/ls  
+name            Sahil        
+verbose         TRUE  
+
+### Get a specific value:
+
+`get_opts("my_dir")`
+
+
+## Load several options from a conf file
+
 ```
-    my_dir 
-"~/mypath" 
-```
-
-
-#### example conf file
-
-
-```r
 conf = system.file("conf/params.conf", package = "params")
 ```
 
-#### load the config file
+### load the config file
 
-```r
-load_conf(conf)
-```
+- check if file.path exists if params end with exe, dir or path
 
 ```
-Reading file, using 'V1' as id_column to remove empty rows.
+load_opts(conf)
 ```
 
-```
-Warning in chk_conf(lst): 
-
-Seems like these paths do not exist, this may cause issues later:
-name          value            
-------------  -----------------
-my_tool_exe   /usr/bin/ls      
-my_dir        path/to/a/folder 
-```
-
-#### load the config file in silence
-
-```r
-opts = load_conf(conf, check = FALSE, verbose = FALSE)
-print(opts) ## print opts as a pretty table
-```
+### auto-complete and checking
+- use {{{myparam}}} to reference previous params
 
 ```
-
-                                 
---------------  -----------------
-my_path         ~/flowr          
-my_tool_exe     /usr/bin/ls      
-my_dir          path/to/a/folder 
-my_conf_path    ~/flowr/conf     
-default_regex   (.*)             
+set_opts(first = "sahil",
+	last = "seth",
+	full = "{{{first}}} {{{last}}}")
+get_opts('full')
+"sahil seth"
 ```
-
-#### Show all options
-- notice how `my_conf_path` autocompleted {{{my_path}}}, getting its value from previous lines
+- both set_opts and load_opts, support auto-complete
 
 
-```r
-get_opts() 
-```
+
+### Using params in your own package
+
+params creates a environment object and stores all parameters in that object. Thus multiple using params packages may be loaded each with a separate set of params.
+
+one liner to to be included in a package !
 
 ```
-
-                                 
---------------  -----------------
-default_regex   (.*)             
-my_conf_path    ~/flowr/conf     
-my_dir          path/to/a/folder 
-my_path         ~/flowr          
-my_tool_exe     /usr/bin/ls      
-regex           (.*)-[ATGC]{1}   
-verbose         TRUE             
+myopts = new_opts()
 ```
 
+The above object provides three functions to load, set and fetch params:
 
-**Here is what the original file looks like**:
+- myopts$get()
+- myopts$set()
+- myopts$load()
+
+
+
+
+**Here is a example con file:**:
 
 ```
 ## ----------------------- p a r a m s     config ------------------------ ##
@@ -128,42 +124,12 @@ my_conf_path	{{{my_path}}}/conf
 default_regex	(.*)
 ```
 
-
-#### Using params in your own package
-
-params creates a environment object and stores all parameters in that object. If there are multiple packages loaded, which are using params, they 
-may override each other's options, clutering the space the same way as options(). Alternatively, one may create a `env` for a package.
-
-
-If you would like to use params in your R packages, use the following lines
-
-
-```r
-## Create a R file in your package, and put the following lines in it
-
-
-
-flowr_opts = new.env()
-
-#' @importFrom params get_opts
-get_opts <- function(x){
-	params::get_opts(x, envir = flowr_opts)
-}
-
-#' @importFrom params set_opts
-set_opts <- function(..., .dots){
-	params::set_opts(..., .dots = .dots, envir = flowr_opts)
-}
-
-#' @importFrom params set_opts
-load_conf <- function(...){
-	params::load_conf(..., envir = flowr_opts)
-}
+### Installation
 
 
 ```
-
-
-Also, you would need to add `params` to the depends field in the `DESCRIPTION` file.
+install.packages("params")
+devtools::install_github("sahilseth/params")
+```
 
 

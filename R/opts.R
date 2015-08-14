@@ -30,7 +30,7 @@ get_opts = function(x, envir = opts){
 #' @importFrom tools assertCondition
 #'
 #' @export
-set_opts = function(..., .dots, envir = opts){
+set_opts = function(..., .dots, .parse = TRUE, envir = opts){
 
 	dots = list(...)
 
@@ -49,6 +49,9 @@ set_opts = function(..., .dots, envir = opts){
 		stop("the elements of the list should be named OR supply params using name = value")
 
 	stopifnot(is.list(.dots))
+
+	if(.parse) ## auto-complete
+		.dots = parse_opts(.dots)
 
 	list2env(.dots, envir = envir)
 
