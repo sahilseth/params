@@ -37,6 +37,7 @@ get_opts()
 
 get_opts, shows all available options:
 
+```
 name            value        
 --------------  -------------
 default_regex   (.*)         
@@ -46,6 +47,7 @@ my_path         ~/flowr
 my_tool_exe     /usr/bin/ls  
 name            Sahil        
 verbose         TRUE  
+```
 
 ### Get a specific value:
 
@@ -97,7 +99,7 @@ The above object provides three functions to load, set and fetch params:
 - myopts$load()
 
 
--
+
 
 **Here is a example con file:**:
 
