@@ -103,7 +103,7 @@ The above object provides three functions to load, set and fetch params:
 
 
 
-**Here is a example con file:**:
+**Here is a example conf file:**:
 
 ```
 ## ----------------------- p a r a m s     config ------------------------ ##
