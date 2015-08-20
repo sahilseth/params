@@ -1,5 +1,7 @@
 
 [![Build Status](https://travis-ci.org/sahilseth/params.png)](https://travis-ci.org/sahilseth/params)
+[![](http://www.r-pkg.org/badges/version/params)](http://cran.rstudio.com/web/packages/flowr/index.html)
+![](http://cranlogs.r-pkg.org/badges/grand-total/params)
 
 
 ## Rationale
