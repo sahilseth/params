@@ -12,6 +12,9 @@
 	lst = as.list(conf$value)
 	names(lst) = conf$name
 
+	lst2 = get_opts(envir = envir)
+	lst = c(lst, lst2)
+
 	if(.parse)
 		lst = parse_opts(lst)
 
