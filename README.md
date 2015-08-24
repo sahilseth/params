@@ -5,27 +5,30 @@
 
 
 ## Rationale
- > Setting/loading and extracting various options into the environment
+> Setting/loading and extracting various options from/into the R environment
 
 > A package level alternative for `options` and `getOptions`, to prevent cluterring the space. 
 
-- ability to store all default options as a tab delimited table
-- automatically check if file.path exists for options relating to files.
-- fetch multiple options as list
-- print options as a pretty table
+## Main Features
+- ability to store all default options as a tab delimited OR command delimited files
+- if a option relates to a file path, automatically check if it exists
+- set OR retrieve multiple options as list
+- print all or few options as a pretty table
 
 
 ## Main functions
 
 - set_opts(): set options into a custom envir
-- get_opts(): extract options
-- load_opts(): Read a tab/comma delimted file using read_sheet and load them as options using set_opts
-- new_opts(): create a options manager to be included in a pacakge
-- print.opts(): print pkg options as a pretty table
+- get_opts(): retrieve options
+- load_opts(): Read a tab/comma delimited file using read_sheet() and load them using set_opts()
+- new_opts(): create a options manager to be included in a R package
+- print.opts(): print options as a pretty table, used by get_opts()
 
 
 
-## Setting up some options
+## Examples: 
+
+**Setting up some options**
 
 
 ```
@@ -37,7 +40,7 @@ set_opts(
 get_opts()	
 ```
 
-get_opts, shows all available options:
+**Retrieving all options** using `get_opts()`
 
 ```
 name            value        
@@ -51,44 +54,43 @@ name            Sahil
 verbose         TRUE  
 ```
 
-### Get a specific value:
+**Retrieving a specific option**
 
 `get_opts("my_dir")`
 
 
-## Load several options from a conf file
+**Loading several options from a conf file**
+
 
 ```
 conf = system.file("conf/params.conf", package = "params")
-```
-
-### load the config file
-
-- check if file.path exists if params end with exe, dir or path
-
-```
 load_opts(conf)
 ```
 
-### auto-complete and checking
-- use {{{myparam}}} to reference previous params
+**Re-use options as part of other options**
+
+> For lack of a better word calling it, auto-completion
+
+- This feature is based on logic-less templating using [R implementation](https://github.com/edwindj/whisker) of [mustache](https://mustache.github.io).
+- Say we define two options *first_name* and *last_name*, to create *full_name*, either we could again use the actual values or first and last names or define *full_name* as `{{{first_name}}} {{{last_name}}}`
 
 ```
-set_opts(first = "sahil",
-	last = "seth",
+set_opts(first = "John", last = "Doe",
 	full = "{{{first}}} {{{last}}}")
 get_opts('full')
-"sahil seth"
+"John Doe"
 ```
+
 - both set_opts and load_opts, support auto-complete
+- this is especially useful in case of paths, and is really inspired by BASH environment variable system.
 
 
 
 ### Using params in your own package
 
-params creates a environment object and stores all parameters in that object. Thus multiple using params packages may be loaded each with a separate set of params.
+params creates a environment object and stores all parameters in that object. Thus multiple packages using params packages may be loaded each with a separate set of options.
 
-one liner to to be included in a package !
+One liner to to be included in a package, to setup !
 
 ```
 myopts = new_opts()
@@ -132,7 +134,9 @@ default_regex	(.*)
 
 
 ```
-install.packages("params")
+install.packages("params") ## stable version from CRAN
+
+## recent devel version
 devtools::install_github("sahilseth/params")
 ```
 
