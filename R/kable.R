@@ -8,6 +8,25 @@ pandoc_to <- function (x){
 }
 out_format = pandoc_to
 
+
+## copied from highr here to satisfy CMD check CRAN
+spaces <- function (n = 1, char = " "){
+	if (n <= 0)
+		return("")
+	if (n == 1)
+		return(char)
+	paste(rep(char, n), collapse = "")
+}
+
+# escape special HTML chars
+escape_html <- function (x){
+	x = gsub("&", "&amp;", x)
+	x = gsub("<", "&lt;", x)
+	x = gsub(">", "&gt;", x)
+	x = gsub("\"", "&quot;", x)
+	x
+}
+
 # escape special LaTeX characters
 escape_latex = function(x, newlines = FALSE, spaces = FALSE) {
 	x = gsub('\\\\', '\\\\textbackslash', x)
@@ -20,8 +39,6 @@ escape_latex = function(x, newlines = FALSE, spaces = FALSE) {
 	x
 }
 
-# escape special HTML chars
-escape_html = highr:::escape_html
 
 #' Create tables in LaTeX, HTML, Markdown and reStructuredText
 #'
@@ -90,12 +107,14 @@ kable = function(
 ) {
 	if (missing(format) || is.null(format)) format = getOption('knitr.table.format')
 	if (is.null(format))
-		format = if (is.null(pandoc_to()))
-			switch(out_format() %n% 'markdown',
-						 latex = 'latex', listings = 'latex', sweave = 'latex',
-						 html = 'html', markdown = 'markdown', rst = 'rst',
-						 stop('table format not implemented yet!')
-			) else 'pandoc'
+		format = switch(out_format(),
+						 latex = 'latex',
+						 listings = 'latex',
+						 sweave = 'latex',
+						 html = 'html',
+						 markdown = 'markdown',
+						 rst = 'rst',
+						 stop('table format not implemented yet!'))
 	col.names # evaluate it now! no lazy evaluation because colnames(x) may change
 	if (!is.matrix(x)) x = as.data.frame(x)
 	m = ncol(x)
@@ -312,5 +331,5 @@ pad_width = function(x, width, side) {
 
 # vectorized over n to generate sequences of spaces
 v_spaces = function(n) {
-	unlist(lapply(n, highr:::spaces))
+	unlist(lapply(n, spaces))
 }

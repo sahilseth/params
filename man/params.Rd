@@ -78,7 +78,14 @@ Below is a list example options, retrieved via
 
 \code{get_opts()}:
 
-\Sexpr[results=verbatim]{params::get_opts()}
+\preformatted{
+	|name          |value            |
+	|default_regex |(.*)             |
+	|my_conf_path  |~/flowr/conf     |
+	|my_dir        |path/to/a/folder |
+	|my_path       |~/flowr          |
+	|my_tool_exe   |/usr/bin/ls      |
+}
 }
 \examples{
 ## set_opts

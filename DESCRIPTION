@@ -3,12 +3,11 @@ Type: Package
 Title: Simplify Parameters
 Description: An interface to simplify organizing parameters used in a package, using external configuration files.
 	This attempts to provide a cleaner alternative to options().
-Version: 0.2.5
-Date: 2015-08-14
+Version: 0.2.6
+Date: 2015-08-22
 Depends:
     whisker
 Imports:
-    highr,
     utils
 Suggests:
    openxlsx

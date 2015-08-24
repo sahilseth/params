@@ -58,9 +58,15 @@
 #'
 #' \code{get_opts()}:
 #'
-#' \Sexpr[results=verbatim]{params::get_opts()}
-
-#'
+#' \preformatted{
+#'	|name          |value            |
+#	|:-------------|:----------------|
+#'	|default_regex |(.*)             |
+#'	|my_conf_path  |~/flowr/conf     |
+#'	|my_dir        |path/to/a/folder |
+#'	|my_path       |~/flowr          |
+#'	|my_tool_exe   |/usr/bin/ls      |
+#'}
 #' @seealso \link{read_sheet} \link{load_opts}
 #'
 #' @export
@@ -85,19 +91,19 @@
 new_opts <- function(envir = new.env()){
 
 	get_opts <- function(x){
-		params::get_opts(x, envir = opts)
+		params::get_opts(x, envir = envir)
 	}
 
 	#' @importFrom params set_opts
 	#' @export
 	set_opts <- function(..., .dots){
-		params::set_opts(..., .dots = .dots, envir = opts)
+		params::set_opts(..., .dots = .dots, envir = envir)
 	}
 
 	#' @importFrom params set_opts
 	#' @export
 	load_opts <- function(...){
-		params::load_opts(..., envir = opts)
+		params::load_opts(..., envir = envir)
 	}
 
 	list(get=get_opts, set=set_opts, load = load_opts)
