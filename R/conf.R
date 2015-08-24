@@ -12,11 +12,12 @@
 	lst = as.list(conf$value)
 	names(lst) = conf$name
 
+	## for auto-completion its best to have
 	lst2 = get_opts(envir = envir)
-	lst = c(lst, lst2)
+	lst = c(lst2, lst)
 
 	if(.parse)
-		lst = parse_opts(lst)
+		lst = parse_opts(lst, envir = envir)
 
 	## -- check the ones with file paths
 	if(check)
@@ -59,7 +60,23 @@ load_conf <- function(...){
 #'
 #'
 #' @import whisker
-parse_opts <- function(lst){
+parse_opts <- function(lst, envir){
+
+	## get values from previous envir
+	## which are being called by name in newer options
+	## example {{{mydir}}}
+	vars <- unlist(regmatches(unlist(lst), gregexpr('(?<=\\{\\{)[[:alnum:]_.]+(?=\\}\\})', unlist(lst), perl=TRUE)))
+	x = get_opts(c("var", unlist(vars)), envir = envir) ## ensure, always a list
+
+	## if there are multiple elements with the same name
+	## this ensures we take the last/latest element
+	lst = c(x, lst)
+	lst = rev(lst)
+	lst = lst[!duplicated(names(lst))]
+
+	## handling duplicates
+	## if a option is set multiple times, we consider the last one.
+
 	## --- sequentially evaluae each configuration
 	for(i in 1:length(lst)){
 		lst[[i]] = whisker.render(lst[[i]], lst, debug = TRUE)

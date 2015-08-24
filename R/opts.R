@@ -51,7 +51,7 @@ set_opts = function(..., .dots, .parse = TRUE, envir = opts){
 	stopifnot(is.list(.dots))
 
 	if(.parse) ## auto-complete
-		.dots = parse_opts(.dots)
+		.dots = parse_opts(.dots, envir = envir)
 
 	list2env(.dots, envir = envir)
 
@@ -64,15 +64,21 @@ set_opts = function(..., .dots, .parse = TRUE, envir = opts){
 print.opts <- function(x, ...){
 	if(length(x) > 1){
 		#message("\nPrinting list of options as a pretty table.")
+		## removing options which are NULL
 		y = cbind(lapply(x, function(f) {
 			unlist(as.data.frame(Filter(Negate(is.null), f)))
 		}))
-		y = data.frame(name = rownames(y), value = unlist(y[,1]))
-		print(kable(y, row.names = FALSE), ...)
+		y = try(data.frame(name = rownames(y), value = unlist(y[,1]), row.names = NULL), silent = TRUE)
+		if(class(y) == "try-error"){
+			message("options not found, returning a simple list.")
+			class(x) = "list"
+			print(x)
+		}else{
+			print(kable(y, row.names = FALSE), ...)
+		}
 		## following does not handle null values well
 		# print(kable(t(as.data.frame(x, row.names = names(x)))))
-	}
-	else(print.default(x, ...))
+	} else(print.default(x, ...))
 }
 
 

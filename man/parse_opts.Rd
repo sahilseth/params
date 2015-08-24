@@ -4,7 +4,7 @@
 \alias{parse_opts}
 \title{parse_opts}
 \usage{
-parse_opts(lst)
+parse_opts(lst, envir)
 }
 \arguments{
 \item{lst}{a list of configuration options to parse}
