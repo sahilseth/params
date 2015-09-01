@@ -3,3 +3,5 @@
 .RData
 site
 *_cache
+
+.DS_Store

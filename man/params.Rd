@@ -103,6 +103,10 @@ get_opts("flow_run_path")
 opts_mypkg = new_opts()
 opts_mypkg$set(version = '0.1', name = 'mypkg')
 opts_mypkg$get()
+
+## get a conf file
+fl = system.file("conf/params.conf", package = "params")
+load_opts(fl)
 }
 \seealso{
 \link{read_sheet}

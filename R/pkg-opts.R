@@ -88,6 +88,9 @@
 #' opts_mypkg$set(version = '0.1', name = 'mypkg')
 #' opts_mypkg$get()
 #'
+#' ## get a conf file
+#' fl = system.file("conf/params.conf", package = "params")
+#' load_opts(fl)
 new_opts <- function(envir = new.env()){
 
 	get_opts <- function(x){
