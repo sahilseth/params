@@ -40,7 +40,7 @@ read_sheet <- function(x, id_column, start_row = 1, sheet = 1, ext, header=TRUE,
 		mat = mat[,!grepl("^X", colnames(mat))]
 	}
 	else{
-		cat("Sorry we do not recognize this file format", ext, "please use tsv, csv or xlsx2 (sheetname: sample_sheet)")
+		stop("Sorry we do not recognize this file format", ext, "please use tsv, csv or xlsx2 (sheetname: sample_sheet)")
 	}
 	### ------ remove blank rows and columns
 	if(missing(id_column)) {

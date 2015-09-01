@@ -65,7 +65,11 @@ parse_opts <- function(lst, envir){
 	## get values from previous envir
 	## which are being called by name in newer options
 	## example {{{mydir}}}
-	vars <- unlist(regmatches(unlist(lst), gregexpr('(?<=\\{\\{)[[:alnum:]_.]+(?=\\}\\})', unlist(lst), perl=TRUE)))
+	get_vars <- function(x){
+		unlist(regmatches(x, gregexpr('(?<=\\{\\{)[[:alnum:]_.]+(?=\\}\\})', x, perl=TRUE)))
+	}
+
+	vars = get_vars(unlist(lst))
 	x = get_opts(c("var", unlist(vars)), envir = envir) ## ensure, always a list
 
 	## if there are multiple elements with the same name
@@ -79,7 +83,9 @@ parse_opts <- function(lst, envir){
 
 	## --- sequentially evaluae each configuration
 	for(i in 1:length(lst)){
-		lst[[i]] = whisker.render(lst[[i]], lst, debug = TRUE)
+		## resolve ONLY when neccesary
+		if(length(get_vars(lst[[i]])) > 0)
+			lst[[i]] = whisker.render(lst[[i]], lst, debug = TRUE)
 	}
 	return(lst)
 }
@@ -88,12 +94,13 @@ parse_opts <- function(lst, envir){
 chk_conf <- function(x){
 	path_pattern = c("path$|dir$|exe$")
 	pths = grep(path_pattern, names(x))
-	mis_pths = !file.exists(as.character(x)[pths])
+	mis_pths = !(file.exists(as.character(x)[pths]))
 	if(sum(mis_pths) > 0){
 		msg = "\n\nSeems like these paths do not exist, this may cause issues later:\n"
 		df = data.frame(name = names(x)[mis_pths],
 										value = as.character(x)[mis_pths])
-		warning(msg, paste(kable(df, row.names = FALSE), collapse = "\n"))
+		warning(msg, collapse = "\n")
+		print(kable(df, row.names = FALSE))
 	}
 }
 
