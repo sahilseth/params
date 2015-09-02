@@ -44,6 +44,7 @@ load_opts <- function(x, check = TRUE, envir = opts, verbose = TRUE, .parse = TR
 	if(length(x) == 1)
 		lst = lst[[1]]
 
+	## return them as a list
 	invisible(lst)
 }
 
@@ -70,7 +71,8 @@ parse_opts <- function(lst, envir){
 	}
 
 	vars = get_vars(unlist(lst))
-	x = get_opts(c("var", unlist(vars)), envir = envir) ## ensure, always a list
+	#x = get_opts(c("var", unlist(vars)), envir = envir) ## ensure, always a list
+	x = as.list(get_opts(vars), envir = envir) ## ensure, always a list
 
 	## if there are multiple elements with the same name
 	## this ensures we take the last/latest element

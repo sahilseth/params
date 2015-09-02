@@ -2,9 +2,9 @@
 }
 
 .onDeatch <- function(lib, pkg) {
-	ops <- options()
+	#ops <- options()
 	#ops <- ops[grep("SaturnV_", names(ops))]
-	options(ops)
+	#options(ops)
 }
 
 
