@@ -68,9 +68,9 @@ print.opts <- function(x, ...){
 		y = cbind(lapply(x, function(f) {
 			unlist(as.data.frame(Filter(Negate(is.null), f)))
 		}))
-		y = try(data.frame(name = rownames(y), value = unlist(y[,1]), row.names = NULL), silent = TRUE)
+		y = try(data.frame(name = rownames(y), value = as.data.frame(y), row.names = NULL), silent = TRUE)
 		if(class(y) == "try-error"){
-			message("options not found, returning a simple list.")
+			message("some options not found, unable to create a pretty table, returning a simple list.")
 			class(x) = "list"
 			print(x)
 		}else{
