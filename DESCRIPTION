@@ -5,12 +5,13 @@ Description: An interface to simplify organizing parameters used in a package, u
 	This attempts to provide a cleaner alternative to options().
 Version: 0.2.9
 Date: 2015-08-22
-Depends:
+Depends: 
     whisker
-Imports:
+Imports: 
     utils
-Suggests:
-   openxlsx
+Suggests: 
+   openxlsx,
+    testthat
 URL: https://github.com/sahilseth/params
 BugReports: https://github.com/sahilseth/params/issues
 Authors@R: c(
