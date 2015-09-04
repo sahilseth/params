@@ -1,4 +1,4 @@
 library(testthat)
 library(params)
 
-test_check("params")
+#test_check("params")

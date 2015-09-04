@@ -4,7 +4,7 @@
 \name{opts}
 \alias{opts}
 \title{default opts}
-\format{\preformatted{<environment: 0x7f874ba0f860> 
+\format{\preformatted{<environment: 0x7facec8a5940> 
 }}
 \usage{
 opts
