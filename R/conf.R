@@ -13,24 +13,26 @@
 				 "seperated by TAB. ")
 
 	colnames(conf) = c("name", "value")
-	lst = as.list(conf$value)
-	names(lst) = conf$name
+	lst1 = as.list(conf$value)
+	names(lst1) = conf$name
 
 	## for auto-completion its best to have
 	lst2 = get_opts(envir = envir)
-	lst = c(lst2, lst)
+	lst = c(lst2, lst1)
 
 	if(.parse)
 		lst = parse_opts(lst, envir = envir)
 
 	## -- check the ones with file paths
-	if(check)
-		chk_conf(lst)
+	if(check){
+		tmp <- chk_conf(lst[names(lst) %in% names(lst1)])
+	}
+
 	#options(lst)
 	set_opts(.dots = lst, envir = envir)
 	#opts()$set(lst)
 	## -- populate these in the global environment
-	invisible(get_opts(names(lst)))
+	invisible(get_opts(names(lst), envir = envir))
 }
 
 #' @rdname params
@@ -103,10 +105,10 @@ chk_conf <- function(x){
 	mis_pths = !(file.exists(as.character(x)[pths]))
 	if(sum(mis_pths) > 0){
 		msg = "\n\nSeems like these paths do not exist, this may cause issues later:\n"
-		df = data.frame(name = names(x)[mis_pths],
-										value = as.character(x)[mis_pths])
+		df = data.frame(name = names(x)[pths][mis_pths],
+										value = as.character(x[pths])[mis_pths])
 		warning(msg, collapse = "\n")
-		print(kable(df, row.names = FALSE))
+		message(paste(kable(df, row.names = FALSE), collapse = "\n"))
 	}
 }
 
