@@ -1,5 +1,5 @@
 
-[![Build Status](https://travis-ci.org/sahilseth/params.png)](https://travis-ci.org/sahilseth/params)
+[![Build Status](https://travis-ci.org/sahilseth/params.svg)](https://travis-ci.org/sahilseth/params)
 [![](http://www.r-pkg.org/badges/version/params)](http://cran.rstudio.com/web/packages/flowr/index.html)
 ![](http://cranlogs.r-pkg.org/badges/grand-total/params)
 
@@ -9,19 +9,20 @@
 > A package level alternative for `options` and `getOptions`, to prevent cluterring the space. 
 
 ## Main Features
-- ability to store all default options as a tab delimited OR command delimited files
-- if a option relates to a file path, automatically check if it exists
-- set OR retrieve multiple options as list
-- print all or few options as a pretty table
+
+- **load from files**: ability to store all default options as a tab delimited OR comma delimited files
+- **check options**: if a option relates to a file path, automatically check if it exists
+- **embeddable** set OR retrieve multiple options as list
+- **clean**: print all or few options as a pretty table
 
 
 ## Main functions
 
-- set_opts(): set options into a custom envir
-- get_opts(): retrieve options
-- load_opts(): Read a tab/comma delimited file using read_sheet() and load them using set_opts()
-- new_opts(): create a options manager to be included in a R package
-- print.opts(): print options as a pretty table, used by get_opts()
+- `set_opts()`: set options into a custom environment
+- `get_opts()`: retrieve options from a custom environment
+- `load_opts()`: Read a tab/comma delimited file using `read_sheet()` and load them using `set_opts()`
+- `new_opts()`: create a options manager (to be used in a R package etc...)
+- `print.opts()`: print options as a pretty table, used by `get_opts()`
 
 
 
@@ -29,11 +30,10 @@
 
 **Setting up some options**
 
-
 ```
 library(params)
 set_opts(
-	name = "Sahil",
+	name = "John",
 	verbose = TRUE, 
 	my_dir = "~/mypath")
 get_opts()	
@@ -49,7 +49,7 @@ my_conf_path    ~/flowr/conf
 my_dir          ~/mypath     
 my_path         ~/flowr      
 my_tool_exe     /usr/bin/ls  
-name            Sahil        
+name            John        
 verbose         TRUE  
 ```
 
@@ -66,12 +66,10 @@ conf = system.file("conf/params.conf", package = "params")
 load_opts(conf)
 ```
 
-**Re-use options as part of other options**
+**Nested options, re-use options as part of other options**
 
-> For lack of a better word calling it, auto-completion
-
-- This feature is based on logic-less templating using [R implementation](https://github.com/edwindj/whisker) of [mustache](https://mustache.github.io).
-- Say we define two options *first_name* and *last_name*, to create *full_name*, either we could again use the actual values or first and last names or define *full_name* as `{{{first_name}}} {{{last_name}}}`
+- This feature is based on logic-less templating using a [R implementation](https://github.com/edwindj/whisker) of [mustache](https://mustache.github.io).
+- Say we define two options *first_name* and *last_name*; to create *full_name*, either we could again use the actual values or first and last names or define *full_name* as `{{{first_name}}} {{{last_name}}}`
 
 ```
 set_opts(first = "John", last = "Doe",
@@ -80,16 +78,15 @@ get_opts('full')
 "John Doe"
 ```
 
-- both set_opts and load_opts, support auto-complete
-- this is especially useful in case of paths, and is really inspired by BASH environment variable system.
-
+- both `set_opts` and `load_opts`, support auto-complete
+- this is especially useful in case of paths, and is really inspired by BASH environment variable system
 
 
 ### Using params in your own package
 
-params creates a environment object and stores all parameters in that object. Thus multiple packages using params packages may be loaded each with a separate set of options.
+Params creates a environment object and stores all parameters in that object. Thus multiple packages using params packages may be loaded each with a separate set of options.
 
-One liner to to be included in a package, to setup !
+**Setup**: One liner to to be included in a package !
 
 ```
 myopts = new_opts()
@@ -102,6 +99,16 @@ The above object provides three functions to load, set and fetch params:
 - myopts$load()
 
 
+### Installation
+
+
+```
+## stable version from CRAN
+install.packages("params") 
+
+## latest, development version
+devtools::install_github("sahilseth/params")
+```
 
 
 **Here is a example conf file:**:
@@ -129,14 +136,5 @@ my_conf_path	{{{my_path}}}/conf
 default_regex	(.*)
 ```
 
-### Installation
-
-
-```
-install.packages("params") ## stable version from CRAN
-
-## recent devel version
-devtools::install_github("sahilseth/params")
-```
 
 

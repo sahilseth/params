@@ -1,8 +1,9 @@
 p a r a m s    latest    2015/08/14
 ------------------------------------------------
 - bug fix with new_opts, use new env object
-- 
-
+- bug fix load_opts, so that only values in the 
+ current file are check (not all options in the environment)
+ 
 p a r a m s    0.2.5    2015/08/14
 ------------------------------------------------
 - bug fix with new_opts, use new env object
