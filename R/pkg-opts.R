@@ -1,6 +1,7 @@
 
 
 #' @rdname params
+#' @name params
 #' @title Setting/loading and extracting various options into the environment
 #'
 #' @aliases get_opts set_opts print.opts params
@@ -21,38 +22,47 @@
 #'
 #' @param ... set_opts(): a named set of variable/value pairs seperated by comma
 #' @param .dots set_opts(): A named list, as a alternative to ...
-#' @param envir environ used to store objects
-#' @param check load_opts(): in case of a configuration file, whether to check if files defined in parameters exists..
-#' @param .parse set_opts(), load_opts(): logical, whether to auto-complete {{{}}} using previous opts
-#' @param verbose load_opts() be chatty ?
+#' @param envir environ used to store objects. Default is a environ object called opts [params:::opts]
+#' @param check load_opts(): in case of a configuration file, whether to check if files defined in parameters exists. [TRUE]
+#' @param .parse set_opts(), load_opts(): logical, whether to auto-complete \code{{{myvar}}} using previously defined options. [TRUE]
+#' @param verbose load_opts(): Logical variable indicate level of verboseness [TRUE]
 
 #' @details
 #'
-#' \subsection{Integrating \link{params} in a package:}{
-#' ## create a options manager:
+#' \strong{Integrating \link{params} in a package:}
+#'
+#' \emph{create a options manager}:
+#'
 #' \code{
 #' opts_mypkg = new_opts()
 #' }
 #'
 #' The object \code{opts_mypkg} is a list of a few functions, which set, fetch and load
-#' options in a isolated environment. Here are a few examples of how you might really use them:
+#' options (using a isolated environment). Here are a few examples:
 #'
-#' ## Set some options:
+#' \emph{Set some options}:
+#'
 #' \code{opts_mypkg$set(version = '0.1', name = 'mypkg')}
 #'
-#' ## Fetch ALL options:
+#' \emph{Fetch ALL options}:
+#'
 #' \code{opts_mypkg$get()}
 #' OR
-#' \code{opts_mypkg$get("version")}
-#'
-#' }
+#' \code{opts_mypkg$get("version")} to fetch a specific option.
 #'
 #'
-#' \subsection{Loading configuration files, \code{load_opts()} OR \code{opts_pkg$load()}:}{
+#' \strong{Loading configuration files}:
+#'
+#' \code{load_opts()} OR \code{opts_pkg$load()}:
+#'
+#'
 #' There are cases when options and params are actually paths to scripts or other apps or folders etc.
 #' In such cases it might be useful to quickly check if these paths exists on the sytem.
-#' As such load_opts() automatically checks params ending with \code{path|dir|exe} (if check=TRUE).
-#' }
+#' As such, \link{load_opts}() automatically checks params ending with \code{path|dir|exe} (if check=TRUE).
+#'
+#' For example, values for variables like \code{mypath}, \code{my_path}, \code{tool_exe}, etc would be check if they exists
+#' and a warning would be shown if they dont exist.
+#'
 #'
 #' Below is a list example options, retrieved via
 #'
@@ -72,25 +82,35 @@
 #' @export
 #'
 #' @examples
-#' ## set_opts
+#' ## Set options
 #' opts = set_opts(flow_run_path = "~/mypath")
 #' #OR
 #' opts = set_opts(.dots = list(flow_run_path = "~/mypath"))
 #'
+#' ## printing options, this is internally called by get_opts()
 #' print(opts)
 #'
-#' ## get_opts()
+#' ## Fetch options
 #' get_opts()
 #' get_opts("flow_run_path")
 #'
-#' ## create a options manager:
-#' opts_mypkg = new_opts()
-#' opts_mypkg$set(version = '0.1', name = 'mypkg')
-#' opts_mypkg$get()
-#'
-#' ## get a conf file
+#' ## Load options from a file
 #' fl = system.file("conf/params.conf", package = "params")
 #' load_opts(fl)
+#'
+#'
+#' ## Create a options manager:
+#' opts_mypkg = new_opts()
+#' ## this provides three functions
+#' opts_mypkg$set(version = '0.1', name = 'mypkg')
+#' opts_mypkg$load(fl)
+#' opts_mypkg$get()
+#'
+#' ## Additionally, one has the options of using braces ({{}})
+#' ## do define nested options:
+#'
+#' set_opts(first = "John", last = "Doe", full = "{{first}} {{last}}")
+#'
 new_opts <- function(envir = new.env()){
 
 	get_opts <- function(x){

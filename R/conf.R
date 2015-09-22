@@ -62,11 +62,15 @@ load_conf <- function(...){
 ## process conf line by line
 ## use whisker to evaluate the string, given available data
 
-#' parse_opts
-#' @param lst a list of configuration options to parse
+#' Parse options to expand \code{{{variable}}} into their respective values
+#' @description
+#' This function is internally called by \link{set_opts} and \link{load_opts}
 #'
+#' @param lst a list of configuration options to parse
+#' @inheritParams load_opts
 #'
 #' @import whisker
+#'
 parse_opts <- function(lst, envir){
 
 	## get values from previous envir

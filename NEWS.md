@@ -1,3 +1,8 @@
+p a r a m s    latest    2015/08/14
+------------------------------------------------
+- bug fix with new_opts, use new env object
+- 
+
 p a r a m s    0.2.5    2015/08/14
 ------------------------------------------------
 - bug fix with new_opts, use new env object
