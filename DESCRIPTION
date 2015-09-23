@@ -5,16 +5,17 @@ Description: An interface to simplify organizing parameters used in a package, u
 	This attempts to provide a cleaner alternative to options().
 Version: 0.3.0
 Depends:
+    R (>= 3.0.2),
     whisker
 Imports:
     utils
 Suggests:
    openxlsx,
     testthat
-URL: https://github.com/sahilseth/params
-BugReports: https://github.com/sahilseth/params/issues
+License: GPL-2
 Authors@R: c(
 		person("Sahil", "Seth", role = c("aut", "cre"), email = "me@sahilseth.com"),
     person("Yihui", "Xie", role = c("ctb"), comment = "kable from knitr R/table.R")
 		)
-License: GPL-2
+URL: https://github.com/sahilseth/params
+BugReports: https://github.com/sahilseth/params/issues
