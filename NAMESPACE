@@ -3,6 +3,7 @@
 S3method(print,knitr_kable)
 S3method(print,opts)
 export(.load_opts)
+export(check_args)
 export(get_opts)
 export(kable)
 export(load_opts)

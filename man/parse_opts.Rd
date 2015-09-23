@@ -2,14 +2,16 @@
 % Please edit documentation in R/conf.R
 \name{parse_opts}
 \alias{parse_opts}
-\title{parse_opts}
+\title{Parse options to expand \code{{{variable}}} into their respective values}
 \usage{
 parse_opts(lst, envir)
 }
 \arguments{
 \item{lst}{a list of configuration options to parse}
+
+\item{envir}{environ used to store objects. Default is a environ object called opts [params:::opts]}
 }
 \description{
-parse_opts
+This function is internally called by \link{set_opts} and \link{load_opts}
 }
 
