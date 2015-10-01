@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<title>load_opts. params 0.3.0</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="">
+
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/bootstrap-responsive.css" rel="stylesheet">
+<link href="css/highlight.css" rel="stylesheet">
+<link href="css/staticdocs.css" rel="stylesheet">
+
+<!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+<script type="text/javascript"
+  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+  </head>
+
+  <body>
+    <div class="navbar">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="#">params 0.3.0</a>
+      <div class="nav">
+        <ul class="nav">
+          <li><a href="index.html"><i class="icon-home icon-white"></i> Index</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <div class="container">
+      <header>
+        
+      </header>
+      
+      <h1>Setting/loading and extracting various options into the environment</h1>
+
+<div class="row">
+  <div class="span8">
+    <h2>Usage</h2>
+    <pre><div>load_opts(x, check&nbsp;=&nbsp;TRUE, envir&nbsp;=&nbsp;opts, verbose&nbsp;=&nbsp;TRUE, .parse&nbsp;=&nbsp;TRUE, ...)</div>
+<div>get_opts(x, envir&nbsp;=&nbsp;opts)</div>
+<div>set_opts(..., .dots, .parse&nbsp;=&nbsp;TRUE, envir&nbsp;=&nbsp;opts)</div>
+<div>## method for class 'opts'
+print(x, ...)</div>
+<div>new_opts(envir&nbsp;=&nbsp;new.env())</div></pre>
+    
+    <h2>Arguments</h2>
+    <dl>
+      <dt>x</dt>
+      <dd><ul>
+<li> get_opts: a character vector of names of options to extract.
+</li>
+<li> load_opts: path to a configuration file
+</li>
+</ul>
+</dd>
+      <dt>check</dt>
+      <dd>load_opts(): in case of a configuration file, whether to check if files defined in parameters exists. [TRUE]</dd>
+      <dt>envir</dt>
+      <dd>environ used to store objects. Default is a environ object called opts [params:::opts]</dd>
+      <dt>verbose</dt>
+      <dd>load_opts(): Logical variable indicate level of verboseness [TRUE]</dd>
+      <dt>.parse</dt>
+      <dd>set_opts(), load_opts(): logical, whether to auto-complete <code>{{myvar}}</code> using previously defined options. [TRUE]</dd>
+      <dt>...</dt>
+      <dd>set_opts(): a named set of variable/value pairs seperated by comma</dd>
+      <dt>.dots</dt>
+      <dd>set_opts(): A named list, as a alternative to ...</dd>
+    </dl>
+    
+    <div class="Description">
+      <h2>Description</h2>
+
+      <p><ul>
+<li> set_opts(): set options into a custom envir
+</li>
+<li> get_opts(): extract options
+</li>
+<li> load_opts(): Read a tab delimted file using <a href='read_sheet.html'>read_sheet</a> and load them as options using <a href='params.html'>set_opts</a>
+</li>
+<li> new_opts(): create a options manager to be included in a pacakge
+</li>
+<li> print.opts(): print pkg options as a pretty table
+</li>
+</ul></p>
+  
+      <p></p>
+  
+    </div>
+
+    <div class="Details">
+      <h2>Details</h2>
+
+      <p><strong>Integrating <a href='params.html'>params</a> in a package:</strong></p>
+  
+      <p><em>create a options manager</em>:</p>
+  
+      <p><code>
+opts_mypkg = new_opts()
+</code></p>
+  
+      <p>The object <code>opts_mypkg</code> is a list of a few functions, which set, fetch and load
+options (using a isolated environment). Here are a few examples:</p>
+  
+      <p><em>Set some options</em>:</p>
+  
+      <p><code>opts_mypkg$set(version = '0.1', name = 'mypkg')</code></p>
+  
+      <p><em>Fetch ALL options</em>:</p>
+  
+      <p><code>opts_mypkg$get()</code>
+OR
+<code>opts_mypkg$get("version")</code> to fetch a specific option.</p>
+  
+      <p><strong>Loading configuration files</strong>:</p>
+  
+      <p><code>load_opts()</code> OR <code>opts_pkg$load()</code>:</p>
+  
+      <p>There are cases when options and params are actually paths to scripts or other apps or folders etc.
+In such cases it might be useful to quickly check if these paths exists on the sytem.
+As such, <a href='params.html'>load_opts</a>() automatically checks params ending with <code>path|dir|exe</code> (if check=TRUE).</p>
+  
+      <p>For example, values for variables like <code>mypath</code>, <code>my_path</code>, <code>tool_exe</code>, etc would be check if they exists
+and a warning would be shown if they dont exist.</p>
+  
+      <p>Below is a list example options, retrieved via</p>
+  
+      <p><code>get_opts()</code>:</p>
+  
+      <p><pre>
+	|name          |value            |
+	|default_regex |(.*)             |
+	|my_conf_path  |~/flowr/conf     |
+	|my_dir        |path/to/a/folder |
+	|my_path       |~/flowr          |
+	|my_tool_exe   |/usr/bin/ls      |
+</pre></p>
+  
+    </div>
+    
+    <h2 id="examples">Examples</h2>
+    <pre class="examples"><div class='input'>## Set options
+opts = set_opts(flow_run_path = &quot;~/mypath&quot;)
+#OR
+opts = set_opts(.dots = list(flow_run_path = &quot;~/mypath&quot;))
+
+## printing options, this is internally called by get_opts()
+print(opts)
+</div>
+<div class='output'>flow_run_path 
+   &quot;~/mypath&quot; 
+</div>
+<div class='input'>
+## Fetch options
+get_opts()
+</div>
+<div class='output'>
+
+|name          |value            |
+|:-------------|:----------------|
+|default_regex |(.*)             |
+|flow_run_path |~/mypath         |
+|my_conf_path  |~/flowr/conf     |
+|my_dir        |path/to/a/folder |
+|my_path       |~/flowr          |
+|my_tool_exe   |/usr/bin/ls      |
+|verbose       |1                |
+</div>
+<div class='input'>get_opts(&quot;flow_run_path&quot;)
+</div>
+<div class='output'>flow_run_path 
+   &quot;~/mypath&quot; 
+</div>
+<div class='input'>
+## Load options from a file
+fl = system.file(&quot;conf/params.conf&quot;, package = &quot;params&quot;)
+load_opts(fl)
+</div>
+<strong class='message'>Reading file, using &#39;V1&#39; as id_column to remove empty rows.</strong>
+<strong class='warning'>Warning message:
+
+
+Seems like these paths do not exist, this may cause issues later:
+|name        |value            |
+|:-----------|:----------------|
+|my_dir      |path/to/a/folder |
+|my_tool_exe |/usr/bin/ls      |</strong>
+<div class='input'>
+
+## Create a options manager:
+opts_mypkg = new_opts()
+## this provides three functions
+opts_mypkg$set(version = &#39;0.1&#39;, name = &#39;mypkg&#39;)
+opts_mypkg$load(fl)
+</div>
+<strong class='message'>Reading file, using &#39;V1&#39; as id_column to remove empty rows.</strong>
+<strong class='warning'>Warning message:
+
+
+Seems like these paths do not exist, this may cause issues later:
+|name        |value            |
+|:-----------|:----------------|
+|my_dir      |path/to/a/folder |
+|my_tool_exe |/usr/bin/ls      |</strong>
+<div class='input'>opts_mypkg$get()
+</div>
+<div class='output'>
+
+|name          |value            |
+|:-------------|:----------------|
+|default_regex |(.*)             |
+|my_conf_path  |~/flowr/conf     |
+|my_dir        |path/to/a/folder |
+|my_path       |~/flowr          |
+|my_tool_exe   |/usr/bin/ls      |
+|name          |mypkg            |
+|verbose       |2                |
+|version       |0.1              |
+</div>
+<div class='input'>
+## Additionally, one has the options of using braces ({{}})
+## do define nested options:
+
+set_opts(first = &quot;John&quot;, last = &quot;Doe&quot;, full = &quot;{{first}} {{last}}&quot;)
+</div></pre>
+  </div>
+  <div class="span4">
+    <!-- <ul>
+      <li>get_opts</li><li>load_opts</li><li>new_opts</li><li>params</li><li>print.opts</li><li>set_opts</li>
+    </ul>
+    <ul>
+      
+    </ul> -->
+      
+    <h2>See also</h2>
+    
+<a href='read_sheet.html'>read_sheet</a>
+
+<a href='read_sheet.html'>read_sheet</a> <a href='params.html'>load_opts</a>
+
+        
+  </div>
+</div>
+      
+      <footer>
+      <p class="pull-right"><a href="#">Back to top</a></p>
+<p>Built by <a href="https://github.com/hadley/staticdocs">staticdocs</a>. Styled with <a href="http://twitter.github.com/bootstrap">bootstrap</a>.</p>
+      </footer>
+    </div>
+  </body>
+</html>

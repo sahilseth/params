@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<title>kable. params 0.3.0</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="">
+
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/bootstrap-responsive.css" rel="stylesheet">
+<link href="css/highlight.css" rel="stylesheet">
+<link href="css/staticdocs.css" rel="stylesheet">
+
+<!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+<script type="text/javascript"
+  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+  </head>
+
+  <body>
+    <div class="navbar">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="#">params 0.3.0</a>
+      <div class="nav">
+        <ul class="nav">
+          <li><a href="index.html"><i class="icon-home icon-white"></i> Index</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <div class="container">
+      <header>
+        
+      </header>
+      
+      <h1>Create tables in LaTeX, HTML, Markdown and reStructuredText</h1>
+
+<div class="row">
+  <div class="span8">
+    <h2>Usage</h2>
+    <pre><div>kable(x, format, digits&nbsp;=&nbsp;getOption("digits"), row.names&nbsp;=&nbsp;NA, col.names&nbsp;=&nbsp;colnames(x), align, caption&nbsp;=&nbsp;NULL, escape&nbsp;=&nbsp;TRUE, ...)</div></pre>
+    
+    <h2>Arguments</h2>
+    <dl>
+      <dt>x</dt>
+      <dd>an R object (typically a matrix or data frame)</dd>
+      <dt>format</dt>
+      <dd>a character string; possible values are <code>latex</code>,
+<code>html</code>, <code>markdown</code>, <code>pandoc</code>, and <code>rst</code>; this will be
+automatically determined if the function is called within <span class = "pkg">knitr</span>; it
+can also be set in the global option <code>knitr.table.format</code></dd>
+      <dt>digits</dt>
+      <dd>the maximum number of digits for numeric columns (passed to
+<code>round()</code>); it can also be a vector of length <code>ncol(x)</code> to set
+the number of digits for individual columns</dd>
+      <dt>row.names</dt>
+      <dd>a logical value indicating whether to include row names; by
+default, row names are included if <code>rownames(x)</code> is neither
+<code>NULL</code> nor identical to <code>1:nrow(x)</code></dd>
+      <dt>col.names</dt>
+      <dd>a character vector of column names to be used in the table</dd>
+      <dt>align</dt>
+      <dd>the alignment of columns: a character vector consisting of
+<code>'l'</code> (left), <code>'c'</code> (center) and/or <code>'r'</code> (right); by
+default, numeric columns are right-aligned, and other columns are
+left-aligned; if <code>align = NULL</code>, the default alignment is used</dd>
+      <dt>caption</dt>
+      <dd>the table caption</dd>
+      <dt>escape</dt>
+      <dd>escape special characters when producing HTML or LaTeX tables</dd>
+      <dt>...</dt>
+      <dd>other arguments (see examples)</dd>
+    </dl>
+    
+    <div class="Value">
+      <h2>Value</h2>
+
+      <p><dl>
+A character vector of the table source code.
+</dl></p>
+  
+    </div>
+
+    <div class="Description">
+      <h2>Description</h2>
+
+      <p>This is a very simple table generator. It is simple by design. It is not
+intended to replace any other R packages for making tables.</p>
+  
+    </div>
+
+    <div class="Note">
+      <h2>Note</h2>
+
+      <p>The tables for <code>format = 'markdown'</code> also work for Pandoc when the
+  <code>pipe_tables</code> extension is enabled (this is the default behavior for
+  Pandoc >= 1.10).</p>
+  
+      <p>When using <code>kable()</code> as a <em>top-level</em> expression, you do not need
+  to explicitly <code>print()</code> it due to R's automatic implicit printing.
+  When it is wrapped inside other expressions (such as a <code><a href='http://www.inside-r.org/r-doc/base/Control'>for</a></code>
+  loop), you must explicitly <code>print(kable(...))</code>.</p>
+  
+    </div>
+
+    <div class="References">
+      <h2>References</h2>
+
+      <p>See
+  <a href = 'https://github.com/yihui/knitr-examples/blob/master/091-knitr-table.Rnw'>https://github.com/yihui/knitr-examples/blob/master/091-knitr-table.Rnw</a>
+   for some examples in LaTeX, but they also apply to other document formats.</p>
+  
+    </div>
+    
+    <h2 id="examples">Examples</h2>
+    <pre class="examples"><div class='input'>kable(head(iris), format = &#39;latex&#39;)
+</div>
+<div class='output'>
+\begin{tabular}{r|r|r|r|l}
+\hline
+Sepal.Length &amp; Sepal.Width &amp; Petal.Length &amp; Petal.Width &amp; Species\\
+\hline
+5.1 &amp; 3.5 &amp; 1.4 &amp; 0.2 &amp; setosa\\
+\hline
+4.9 &amp; 3.0 &amp; 1.4 &amp; 0.2 &amp; setosa\\
+\hline
+4.7 &amp; 3.2 &amp; 1.3 &amp; 0.2 &amp; setosa\\
+\hline
+4.6 &amp; 3.1 &amp; 1.5 &amp; 0.2 &amp; setosa\\
+\hline
+5.0 &amp; 3.6 &amp; 1.4 &amp; 0.2 &amp; setosa\\
+\hline
+5.4 &amp; 3.9 &amp; 1.7 &amp; 0.4 &amp; setosa\\
+\hline
+\end{tabular}
+</div>
+<div class='input'>kable(head(iris), format = &#39;html&#39;)
+</div>
+<div class='output'>&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style=&quot;text-align:right;&quot;&gt; Sepal.Length &lt;/th&gt;
+   &lt;th style=&quot;text-align:right;&quot;&gt; Sepal.Width &lt;/th&gt;
+   &lt;th style=&quot;text-align:right;&quot;&gt; Petal.Length &lt;/th&gt;
+   &lt;th style=&quot;text-align:right;&quot;&gt; Petal.Width &lt;/th&gt;
+   &lt;th style=&quot;text-align:left;&quot;&gt; Species &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 5.1 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 3.5 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 1.4 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 0.2 &lt;/td&gt;
+   &lt;td style=&quot;text-align:left;&quot;&gt; setosa &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 4.9 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 3.0 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 1.4 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 0.2 &lt;/td&gt;
+   &lt;td style=&quot;text-align:left;&quot;&gt; setosa &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 4.7 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 3.2 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 1.3 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 0.2 &lt;/td&gt;
+   &lt;td style=&quot;text-align:left;&quot;&gt; setosa &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 4.6 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 3.1 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 1.5 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 0.2 &lt;/td&gt;
+   &lt;td style=&quot;text-align:left;&quot;&gt; setosa &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 5.0 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 3.6 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 1.4 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 0.2 &lt;/td&gt;
+   &lt;td style=&quot;text-align:left;&quot;&gt; setosa &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 5.4 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 3.9 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 1.7 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 0.4 &lt;/td&gt;
+   &lt;td style=&quot;text-align:left;&quot;&gt; setosa &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+</div>
+<div class='input'>kable(head(iris), format = &#39;latex&#39;, caption = &#39;Title of the table&#39;)
+</div>
+<div class='output'>\begin{table}
+
+\caption{Title of the table}
+\begin{tabular}{r|r|r|r|l}
+\hline
+Sepal.Length &amp; Sepal.Width &amp; Petal.Length &amp; Petal.Width &amp; Species\\
+\hline
+5.1 &amp; 3.5 &amp; 1.4 &amp; 0.2 &amp; setosa\\
+\hline
+4.9 &amp; 3.0 &amp; 1.4 &amp; 0.2 &amp; setosa\\
+\hline
+4.7 &amp; 3.2 &amp; 1.3 &amp; 0.2 &amp; setosa\\
+\hline
+4.6 &amp; 3.1 &amp; 1.5 &amp; 0.2 &amp; setosa\\
+\hline
+5.0 &amp; 3.6 &amp; 1.4 &amp; 0.2 &amp; setosa\\
+\hline
+5.4 &amp; 3.9 &amp; 1.7 &amp; 0.4 &amp; setosa\\
+\hline
+\end{tabular}
+\end{table}
+</div>
+<div class='input'>kable(head(iris), format = &#39;html&#39;, caption = &#39;Title of the table&#39;)
+</div>
+<div class='output'>&lt;table&gt;
+&lt;caption&gt;Title of the table&lt;/caption&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style=&quot;text-align:right;&quot;&gt; Sepal.Length &lt;/th&gt;
+   &lt;th style=&quot;text-align:right;&quot;&gt; Sepal.Width &lt;/th&gt;
+   &lt;th style=&quot;text-align:right;&quot;&gt; Petal.Length &lt;/th&gt;
+   &lt;th style=&quot;text-align:right;&quot;&gt; Petal.Width &lt;/th&gt;
+   &lt;th style=&quot;text-align:left;&quot;&gt; Species &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 5.1 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 3.5 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 1.4 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 0.2 &lt;/td&gt;
+   &lt;td style=&quot;text-align:left;&quot;&gt; setosa &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 4.9 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 3.0 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 1.4 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 0.2 &lt;/td&gt;
+   &lt;td style=&quot;text-align:left;&quot;&gt; setosa &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 4.7 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 3.2 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 1.3 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 0.2 &lt;/td&gt;
+   &lt;td style=&quot;text-align:left;&quot;&gt; setosa &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 4.6 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 3.1 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 1.5 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 0.2 &lt;/td&gt;
+   &lt;td style=&quot;text-align:left;&quot;&gt; setosa &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 5.0 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 3.6 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 1.4 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 0.2 &lt;/td&gt;
+   &lt;td style=&quot;text-align:left;&quot;&gt; setosa &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 5.4 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 3.9 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 1.7 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 0.4 &lt;/td&gt;
+   &lt;td style=&quot;text-align:left;&quot;&gt; setosa &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+</div>
+<div class='input'># add some table attributes
+kable(head(iris), format = &#39;html&#39;, table.attr = &#39;id=&quot;mytable&quot;&#39;)
+</div>
+<div class='output'>&lt;table id=&quot;mytable&quot;&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style=&quot;text-align:right;&quot;&gt; Sepal.Length &lt;/th&gt;
+   &lt;th style=&quot;text-align:right;&quot;&gt; Sepal.Width &lt;/th&gt;
+   &lt;th style=&quot;text-align:right;&quot;&gt; Petal.Length &lt;/th&gt;
+   &lt;th style=&quot;text-align:right;&quot;&gt; Petal.Width &lt;/th&gt;
+   &lt;th style=&quot;text-align:left;&quot;&gt; Species &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 5.1 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 3.5 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 1.4 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 0.2 &lt;/td&gt;
+   &lt;td style=&quot;text-align:left;&quot;&gt; setosa &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 4.9 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 3.0 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 1.4 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 0.2 &lt;/td&gt;
+   &lt;td style=&quot;text-align:left;&quot;&gt; setosa &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 4.7 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 3.2 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 1.3 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 0.2 &lt;/td&gt;
+   &lt;td style=&quot;text-align:left;&quot;&gt; setosa &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 4.6 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 3.1 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 1.5 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 0.2 &lt;/td&gt;
+   &lt;td style=&quot;text-align:left;&quot;&gt; setosa &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 5.0 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 3.6 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 1.4 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 0.2 &lt;/td&gt;
+   &lt;td style=&quot;text-align:left;&quot;&gt; setosa &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 5.4 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 3.9 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 1.7 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 0.4 &lt;/td&gt;
+   &lt;td style=&quot;text-align:left;&quot;&gt; setosa &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+</div>
+<div class='input'># reST output
+kable(head(mtcars), format = &#39;rst&#39;)
+</div>
+<div class='output'>
+
+=================  ====  ===  ====  ===  ====  =====  =====  ===  ===  ====  ====
+\                   mpg  cyl  disp   hp  drat     wt   qsec   vs   am  gear  carb
+=================  ====  ===  ====  ===  ====  =====  =====  ===  ===  ====  ====
+Mazda RX4          21.0    6   160  110  3.90  2.620  16.46    0    1     4     4
+Mazda RX4 Wag      21.0    6   160  110  3.90  2.875  17.02    0    1     4     4
+Datsun 710         22.8    4   108   93  3.85  2.320  18.61    1    1     4     1
+Hornet 4 Drive     21.4    6   258  110  3.08  3.215  19.44    1    0     3     1
+Hornet Sportabout  18.7    8   360  175  3.15  3.440  17.02    0    0     3     2
+Valiant            18.1    6   225  105  2.76  3.460  20.22    1    0     3     1
+=================  ====  ===  ====  ===  ====  =====  =====  ===  ===  ====  ====
+</div>
+<div class='input'># no row names
+kable(head(mtcars), format = &#39;rst&#39;, row.names = FALSE)
+</div>
+<div class='output'>
+
+====  ===  ====  ===  ====  =====  =====  ===  ===  ====  ====
+ mpg  cyl  disp   hp  drat     wt   qsec   vs   am  gear  carb
+====  ===  ====  ===  ====  =====  =====  ===  ===  ====  ====
+21.0    6   160  110  3.90  2.620  16.46    0    1     4     4
+21.0    6   160  110  3.90  2.875  17.02    0    1     4     4
+22.8    4   108   93  3.85  2.320  18.61    1    1     4     1
+21.4    6   258  110  3.08  3.215  19.44    1    0     3     1
+18.7    8   360  175  3.15  3.440  17.02    0    0     3     2
+18.1    6   225  105  2.76  3.460  20.22    1    0     3     1
+====  ===  ====  ===  ====  =====  =====  ===  ===  ====  ====
+</div>
+<div class='input'># R Markdown/Github Markdown tables
+kable(head(mtcars[, 1:5]), format = &#39;markdown&#39;)
+</div>
+<div class='output'>
+
+|                  |  mpg| cyl| disp|  hp| drat|
+|:-----------------|----:|---:|----:|---:|----:|
+|Mazda RX4         | 21.0|   6|  160| 110| 3.90|
+|Mazda RX4 Wag     | 21.0|   6|  160| 110| 3.90|
+|Datsun 710        | 22.8|   4|  108|  93| 3.85|
+|Hornet 4 Drive    | 21.4|   6|  258| 110| 3.08|
+|Hornet Sportabout | 18.7|   8|  360| 175| 3.15|
+|Valiant           | 18.1|   6|  225| 105| 2.76|
+</div>
+<div class='input'># no inner padding
+kable(head(mtcars), format = &#39;markdown&#39;, padding = 0)
+</div>
+<div class='output'>
+
+|                 | mpg|cyl|disp| hp|drat|   wt| qsec| vs| am|gear|carb|
+|:----------------|---:|--:|---:|--:|---:|----:|----:|--:|--:|---:|---:|
+|Mazda RX4        |21.0|  6| 160|110|3.90|2.620|16.46|  0|  1|   4|   4|
+|Mazda RX4 Wag    |21.0|  6| 160|110|3.90|2.875|17.02|  0|  1|   4|   4|
+|Datsun 710       |22.8|  4| 108| 93|3.85|2.320|18.61|  1|  1|   4|   1|
+|Hornet 4 Drive   |21.4|  6| 258|110|3.08|3.215|19.44|  1|  0|   3|   1|
+|Hornet Sportabout|18.7|  8| 360|175|3.15|3.440|17.02|  0|  0|   3|   2|
+|Valiant          |18.1|  6| 225|105|2.76|3.460|20.22|  1|  0|   3|   1|
+</div>
+<div class='input'># more padding
+kable(head(mtcars), format = &#39;markdown&#39;, padding = 2)
+</div>
+<div class='output'>
+
+|                   |   mpg|  cyl|  disp|   hp|  drat|     wt|   qsec|  vs|  am|  gear|  carb|
+|:------------------|-----:|----:|-----:|----:|-----:|------:|------:|---:|---:|-----:|-----:|
+|Mazda RX4          |  21.0|    6|   160|  110|  3.90|  2.620|  16.46|   0|   1|     4|     4|
+|Mazda RX4 Wag      |  21.0|    6|   160|  110|  3.90|  2.875|  17.02|   0|   1|     4|     4|
+|Datsun 710         |  22.8|    4|   108|   93|  3.85|  2.320|  18.61|   1|   1|     4|     1|
+|Hornet 4 Drive     |  21.4|    6|   258|  110|  3.08|  3.215|  19.44|   1|   0|     3|     1|
+|Hornet Sportabout  |  18.7|    8|   360|  175|  3.15|  3.440|  17.02|   0|   0|     3|     2|
+|Valiant            |  18.1|    6|   225|  105|  2.76|  3.460|  20.22|   1|   0|     3|     1|
+</div>
+<div class='input'># Pandoc tables
+kable(head(mtcars), format = &#39;pandoc&#39;, caption = &#39;Title of the table&#39;)
+</div>
+<div class='output'>
+
+Table: Title of the table
+
+                      mpg   cyl   disp    hp   drat      wt    qsec   vs   am   gear   carb
+------------------  -----  ----  -----  ----  -----  ------  ------  ---  ---  -----  -----
+Mazda RX4            21.0     6    160   110   3.90   2.620   16.46    0    1      4      4
+Mazda RX4 Wag        21.0     6    160   110   3.90   2.875   17.02    0    1      4      4
+Datsun 710           22.8     4    108    93   3.85   2.320   18.61    1    1      4      1
+Hornet 4 Drive       21.4     6    258   110   3.08   3.215   19.44    1    0      3      1
+Hornet Sportabout    18.7     8    360   175   3.15   3.440   17.02    0    0      3      2
+Valiant              18.1     6    225   105   2.76   3.460   20.22    1    0      3      1
+</div>
+<div class='input'># save the value
+x = kable(mtcars, format = &#39;html&#39;)
+cat(x, sep = &#39;\n&#39;)
+</div>
+<div class='output'>&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style=&quot;text-align:left;&quot;&gt;   &lt;/th&gt;
+   &lt;th style=&quot;text-align:right;&quot;&gt; mpg &lt;/th&gt;
+   &lt;th style=&quot;text-align:right;&quot;&gt; cyl &lt;/th&gt;
+   &lt;th style=&quot;text-align:right;&quot;&gt; disp &lt;/th&gt;
+   &lt;th style=&quot;text-align:right;&quot;&gt; hp &lt;/th&gt;
+   &lt;th style=&quot;text-align:right;&quot;&gt; drat &lt;/th&gt;
+   &lt;th style=&quot;text-align:right;&quot;&gt; wt &lt;/th&gt;
+   &lt;th style=&quot;text-align:right;&quot;&gt; qsec &lt;/th&gt;
+   &lt;th style=&quot;text-align:right;&quot;&gt; vs &lt;/th&gt;
+   &lt;th style=&quot;text-align:right;&quot;&gt; am &lt;/th&gt;
+   &lt;th style=&quot;text-align:right;&quot;&gt; gear &lt;/th&gt;
+   &lt;th style=&quot;text-align:right;&quot;&gt; carb &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style=&quot;text-align:left;&quot;&gt; Mazda RX4 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 21.0 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 6 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 160.0 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 110 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 3.90 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 2.620 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 16.46 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 0 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 1 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 4 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 4 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&quot;text-align:left;&quot;&gt; Mazda RX4 Wag &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 21.0 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 6 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 160.0 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 110 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 3.90 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 2.875 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 17.02 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 0 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 1 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 4 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 4 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&quot;text-align:left;&quot;&gt; Datsun 710 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 22.8 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 4 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 108.0 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 93 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 3.85 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 2.320 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 18.61 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 1 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 1 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 4 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 1 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&quot;text-align:left;&quot;&gt; Hornet 4 Drive &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 21.4 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 6 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 258.0 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 110 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 3.08 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 3.215 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 19.44 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 1 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 0 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 3 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 1 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&quot;text-align:left;&quot;&gt; Hornet Sportabout &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 18.7 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 8 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 360.0 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 175 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 3.15 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 3.440 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 17.02 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 0 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 0 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 3 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 2 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&quot;text-align:left;&quot;&gt; Valiant &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 18.1 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 6 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 225.0 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 105 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 2.76 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 3.460 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 20.22 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 1 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 0 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 3 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 1 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&quot;text-align:left;&quot;&gt; Duster 360 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 14.3 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 8 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 360.0 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 245 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 3.21 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 3.570 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 15.84 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 0 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 0 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 3 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 4 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&quot;text-align:left;&quot;&gt; Merc 240D &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 24.4 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 4 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 146.7 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 62 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 3.69 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 3.190 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 20.00 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 1 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 0 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 4 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 2 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&quot;text-align:left;&quot;&gt; Merc 230 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 22.8 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 4 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 140.8 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 95 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 3.92 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 3.150 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 22.90 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 1 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 0 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 4 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 2 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&quot;text-align:left;&quot;&gt; Merc 280 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 19.2 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 6 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 167.6 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 123 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 3.92 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 3.440 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 18.30 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 1 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 0 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 4 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 4 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&quot;text-align:left;&quot;&gt; Merc 280C &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 17.8 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 6 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 167.6 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 123 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 3.92 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 3.440 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 18.90 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 1 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 0 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 4 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 4 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&quot;text-align:left;&quot;&gt; Merc 450SE &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 16.4 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 8 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 275.8 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 180 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 3.07 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 4.070 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 17.40 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 0 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 0 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 3 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 3 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&quot;text-align:left;&quot;&gt; Merc 450SL &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 17.3 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 8 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 275.8 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 180 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 3.07 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 3.730 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 17.60 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 0 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 0 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 3 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 3 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&quot;text-align:left;&quot;&gt; Merc 450SLC &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 15.2 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 8 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 275.8 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 180 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 3.07 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 3.780 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 18.00 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 0 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 0 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 3 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 3 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&quot;text-align:left;&quot;&gt; Cadillac Fleetwood &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 10.4 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 8 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 472.0 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 205 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 2.93 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 5.250 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 17.98 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 0 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 0 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 3 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 4 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&quot;text-align:left;&quot;&gt; Lincoln Continental &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 10.4 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 8 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 460.0 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 215 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 3.00 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 5.424 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 17.82 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 0 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 0 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 3 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 4 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&quot;text-align:left;&quot;&gt; Chrysler Imperial &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 14.7 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 8 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 440.0 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 230 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 3.23 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 5.345 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 17.42 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 0 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 0 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 3 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 4 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&quot;text-align:left;&quot;&gt; Fiat 128 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 32.4 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 4 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 78.7 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 66 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 4.08 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 2.200 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 19.47 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 1 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 1 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 4 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 1 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&quot;text-align:left;&quot;&gt; Honda Civic &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 30.4 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 4 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 75.7 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 52 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 4.93 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 1.615 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 18.52 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 1 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 1 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 4 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 2 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&quot;text-align:left;&quot;&gt; Toyota Corolla &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 33.9 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 4 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 71.1 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 65 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 4.22 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 1.835 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 19.90 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 1 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 1 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 4 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 1 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&quot;text-align:left;&quot;&gt; Toyota Corona &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 21.5 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 4 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 120.1 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 97 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 3.70 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 2.465 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 20.01 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 1 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 0 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 3 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 1 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&quot;text-align:left;&quot;&gt; Dodge Challenger &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 15.5 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 8 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 318.0 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 150 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 2.76 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 3.520 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 16.87 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 0 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 0 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 3 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 2 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&quot;text-align:left;&quot;&gt; AMC Javelin &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 15.2 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 8 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 304.0 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 150 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 3.15 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 3.435 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 17.30 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 0 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 0 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 3 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 2 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&quot;text-align:left;&quot;&gt; Camaro Z28 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 13.3 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 8 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 350.0 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 245 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 3.73 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 3.840 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 15.41 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 0 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 0 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 3 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 4 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&quot;text-align:left;&quot;&gt; Pontiac Firebird &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 19.2 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 8 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 400.0 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 175 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 3.08 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 3.845 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 17.05 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 0 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 0 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 3 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 2 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&quot;text-align:left;&quot;&gt; Fiat X1-9 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 27.3 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 4 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 79.0 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 66 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 4.08 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 1.935 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 18.90 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 1 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 1 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 4 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 1 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&quot;text-align:left;&quot;&gt; Porsche 914-2 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 26.0 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 4 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 120.3 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 91 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 4.43 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 2.140 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 16.70 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 0 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 1 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 5 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 2 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&quot;text-align:left;&quot;&gt; Lotus Europa &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 30.4 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 4 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 95.1 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 113 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 3.77 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 1.513 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 16.90 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 1 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 1 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 5 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 2 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&quot;text-align:left;&quot;&gt; Ford Pantera L &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 15.8 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 8 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 351.0 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 264 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 4.22 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 3.170 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 14.50 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 0 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 1 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 5 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 4 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&quot;text-align:left;&quot;&gt; Ferrari Dino &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 19.7 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 6 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 145.0 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 175 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 3.62 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 2.770 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 15.50 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 0 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 1 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 5 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 6 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&quot;text-align:left;&quot;&gt; Maserati Bora &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 15.0 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 8 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 301.0 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 335 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 3.54 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 3.570 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 14.60 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 0 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 1 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 5 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 8 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&quot;text-align:left;&quot;&gt; Volvo 142E &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 21.4 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 4 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 121.0 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 109 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 4.11 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 2.780 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 18.60 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 1 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 1 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 4 &lt;/td&gt;
+   &lt;td style=&quot;text-align:right;&quot;&gt; 2 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+</div>
+<div class='input'># can also set options(knitr.table.format = &#39;html&#39;) so that the output is HTML
+</div></pre>
+  </div>
+  <div class="span4">
+    <!-- <ul>
+      <li>kable</li>
+    </ul>
+    <ul>
+      
+    </ul> -->
+      
+    <h2>See also</h2>
+    
+Other R packages such as <span class = "pkg">xtable</span> and <span class = "pkg">tables</span> for HTML and
+  LaTeX tables, and <span class = "pkg">ascii</span> and <span class = "pkg">pander</span> for different flavors of
+  markdown output and some advanced features and table styles.
+
+        
+  </div>
+</div>
+      
+      <footer>
+      <p class="pull-right"><a href="#">Back to top</a></p>
+<p>Built by <a href="https://github.com/hadley/staticdocs">staticdocs</a>. Styled with <a href="http://twitter.github.com/bootstrap">bootstrap</a>.</p>
+      </footer>
+    </div>
+  </body>
+</html>
