@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-<title>read_sheet. params 0.3.0</title>
+<title>read_sheet. params 0.3.1</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="author" content="">
 
@@ -32,7 +32,7 @@
     <div class="navbar">
   <div class="navbar-inner">
     <div class="container">
-      <a class="brand" href="#">params 0.3.0</a>
+      <a class="brand" href="#">params 0.3.1</a>
       <div class="nav">
         <ul class="nav">
           <li><a href="index.html"><i class="icon-home icon-white"></i> Index</a></li>
@@ -64,15 +64,15 @@
       <dt>start_row</dt>
       <dd>supplied to read.xlsx</dd>
       <dt>sheet</dt>
-      <dd>supplied to read.xlsx, index or name of the sheet to be read from excel file</dd>
+      <dd>supplied to read.xlsx, index or name of the sheet to be read from excel file. See <a href='http://rpackages.ianhowson.com/cran/openxlsx/man/read.xlsx.html'>read.xlsx</a></dd>
       <dt>ext</dt>
       <dd>determined using file extention. Specifying will override</dd>
       <dt>header</dt>
-      <dd>first line is header?</dd>
+      <dd>first line is header? See read_table</dd>
       <dt>verbose</dt>
       <dd>verbosity level.</dd>
       <dt>...</dt>
-      <dd>passed onto read.xlsx of openxlsx, read.table of read.csv2 depending on the file type.</dd>
+      <dd>passed onto read.xlsx of openxlsx, read.table or read.csv2 depending on the file type.</dd>
       <dt>file</dt>
       <dd>write: output file name.</dd>
     </dl>
@@ -107,39 +107,34 @@
 </li>
 </ul></p>
   
-      <p></p>
+      <p><strong>Some important default values for tsv and csv files</strong></p>
+  
+      <p><code>stringsAsFactors = FALSE,comment.char = '#', strip.white=TRUE, blank.lines.skip=TRUE</code></p>
   
     </div>
     
     <h2 id="examples">Examples</h2>
     <pre class="examples"><div class='input'>## read a excel sheet
-xlfl &lt;- system.file(&quot;extdata/example.xlsx&quot;, package = &quot;params&quot;)
-sheet = read_sheet(xlfl)
+sheet = read_sheet(system.file(&quot;extdata/example.xlsx&quot;, package = &quot;params&quot;))
 </div>
 <strong class='message'>Removing extra columns</strong>
 <div class='input'>
-csvfl &lt;- system.file(&quot;extdata/example.csv&quot;, package = &quot;params&quot;)
-csv = read_sheet(&quot;example.csv&quot;)
-</div>
-<strong class='warning'>Warning message:
-cannot open file &#39;example.csv&#39;: No such file or directory</strong>
-<strong class='error'>Error in file(file, &quot;rt&quot;): cannot open the connection</strong>
-<div class='input'>
-tsvfl &lt;- system.file(&quot;extdata/example.tsv&quot;, package = &quot;params&quot;)
-tsv = read_sheet(&quot;example.tsv&quot;)
-</div>
-<strong class='warning'>Warning message:
-cannot open file &#39;example.tsv&#39;: No such file or directory</strong>
-<strong class='error'>Error in file(file, &quot;rt&quot;): cannot open the connection</strong>
-<div class='input'>
+## read a comma seperated sheet
+csv = read_sheet(system.file(&quot;extdata/example.csv&quot;, package = &quot;params&quot;))
+
+## read a tab seperate sheet
+tsv = read_sheet(system.file(&quot;extdata/example.tsv&quot;, package = &quot;params&quot;))
+
 
 # write sheets -------
 
 ## write a comma seperated sheet
 write_sheet(sheet, &quot;example.csv&quot;)
+
 ## write a tab seperated sheet
 write_sheet(sheet, &quot;example.tsv&quot;)
-## write a excel seperated sheet
+
+## write an excel seperated sheet
 write_sheet(sheet, &quot;example.xlsx&quot;)
 </div></pre>
   </div>
