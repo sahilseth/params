@@ -111,8 +111,8 @@ chk_conf <- function(x){
 		msg = "\n\nSeems like these paths do not exist, this may cause issues later:\n"
 		df = data.frame(name = names(x)[pths][mis_pths],
 										value = as.character(x[pths])[mis_pths])
-		warning(msg, collapse = "\n")
-		message(paste(kable(df, row.names = FALSE), collapse = "\n"))
+		warning(msg,
+						paste(kable(df, row.names = FALSE), collapse = "\n"))
 	}
 }
 
