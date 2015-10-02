@@ -40,10 +40,16 @@ escape_latex = function(x, newlines = FALSE, spaces = FALSE) {
 }
 
 
+#' @title
 #' Create tables in LaTeX, HTML, Markdown and reStructuredText
 #'
+#' @description
 #' This is a very simple table generator. It is simple by design. It is not
 #' intended to replace any other R packages for making tables.
+#' This is a trimmed down version of the original kable function in knitr package.
+#' Please refer to knitr's \link[knitr]{kable} function for details.
+#'
+#'
 #' @param x an R object (typically a matrix or data frame)
 #' @param format a character string; possible values are \code{latex},
 #'   \code{html}, \code{markdown}, \code{pandoc}, and \code{rst}; this will be
@@ -63,44 +69,11 @@ escape_latex = function(x, newlines = FALSE, spaces = FALSE) {
 #' @param caption the table caption
 #' @param escape escape special characters when producing HTML or LaTeX tables
 #' @param ... other arguments (see examples)
-#' @return A character vector of the table source code.
-#' @seealso Other R packages such as \pkg{xtable} and \pkg{tables} for HTML and
-#'   LaTeX tables, and \pkg{ascii} and \pkg{pander} for different flavors of
-#'   markdown output and some advanced features and table styles.
-#' @note The tables for \code{format = 'markdown'} also work for Pandoc when the
-#'   \code{pipe_tables} extension is enabled (this is the default behavior for
-#'   Pandoc >= 1.10).
 #'
-#'   When using \code{kable()} as a \emph{top-level} expression, you do not need
-#'   to explicitly \code{print()} it due to R's automatic implicit printing.
-#'   When it is wrapped inside other expressions (such as a \code{\link{for}}
-#'   loop), you must explicitly \code{print(kable(...))}.
-#' @references See
-#'   \url{https://github.com/yihui/knitr-examples/blob/master/091-knitr-table.Rnw}
-#'    for some examples in LaTeX, but they also apply to other document formats.
+#'
 #' @export
-#' @examples  kable(head(iris), format = 'latex')
-#' kable(head(iris), format = 'html')
-#' kable(head(iris), format = 'latex', caption = 'Title of the table')
-#' kable(head(iris), format = 'html', caption = 'Title of the table')
-#' # add some table attributes
-#' kable(head(iris), format = 'html', table.attr = 'id="mytable"')
-#' # reST output
-#' kable(head(mtcars), format = 'rst')
-#' # no row names
-#' kable(head(mtcars), format = 'rst', row.names = FALSE)
-#' # R Markdown/Github Markdown tables
-#' kable(head(mtcars[, 1:5]), format = 'markdown')
-#' # no inner padding
-#' kable(head(mtcars), format = 'markdown', padding = 0)
-#' # more padding
-#' kable(head(mtcars), format = 'markdown', padding = 2)
-#' # Pandoc tables
-#' kable(head(mtcars), format = 'pandoc', caption = 'Title of the table')
-#' # save the value
-#' x = kable(mtcars, format = 'html')
-#' cat(x, sep = '\n')
-#' # can also set options(knitr.table.format = 'html') so that the output is HTML
+#' @author Yihui Xie \href{yihui.name}{http://yihui.name}
+#'
 kable = function(
 	x, format, digits = getOption('digits'), row.names = NA, col.names = colnames(x),
 	align, caption = NULL, escape = TRUE, ...
