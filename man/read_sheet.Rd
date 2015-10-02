@@ -17,7 +17,7 @@ write_sheet(x, file, ext, ...)
 
 \item{start_row}{supplied to read.xlsx}
 
-\item{sheet}{supplied to read.xlsx, index or name of the sheet to be read from excel file. See \link{read.xlsx}}
+\item{sheet}{supplied to read.xlsx, index or name of the sheet to be read from excel file. See \link[openxlsx]{read.xlsx}}
 
 \item{ext}{determined using file extention. Specifying will override}
 

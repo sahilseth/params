@@ -1,6 +1,7 @@
 #' @rdname read_sheet
 #' @export
 #' @importFrom utils write.table
+#'
 write_sheet <- function(x, file, ext, ...){
 	if(missing(ext))
 		ext <- file_ext(file)
@@ -16,8 +17,7 @@ write_sheet <- function(x, file, ext, ...){
 			stop("openxlsx needed for this function to work. Please install it.",
 					 call. = FALSE)
 		}
-
-		write.xlsx(x, file = file, colNames = TRUE, ...)
+		openxlsx::write.xlsx(x, file = file, colNames = TRUE, ...)
 
 	}else{
 		stop("Sorry write_sheet does not recognize this file format: ", ext,

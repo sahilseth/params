@@ -21,7 +21,7 @@
 #' @param ... passed onto read.xlsx of openxlsx, read.table or read.csv2 depending on the file type.
 #'
 #' @param start_row supplied to read.xlsx
-#' @param sheet supplied to read.xlsx, index or name of the sheet to be read from excel file. See \link{read.xlsx}
+#' @param sheet supplied to read.xlsx, index or name of the sheet to be read from excel file. See \link[openxlsx]{read.xlsx}
 #'
 #' @param header first line is header? See \link{read.table}
 #'
