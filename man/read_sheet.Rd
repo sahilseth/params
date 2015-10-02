@@ -32,6 +32,8 @@ write_sheet(x, file, ext, ...)
 \description{
 Read/Write sheets (automatically detect the file type and work accordingly)
 
+write_sheet requires version 0.3.1.
+
 \itemize{
 \item \strong{tsv, txt, conf, def}: assumed to be tab-delimited
 \item \strong{csv}: assumed to be comma delimited
