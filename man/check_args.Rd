@@ -19,9 +19,9 @@ are NULL
 myfunc <- function(verbose = get_opts("verbose"), b = get_opts("b")){
   check_args()
 }
-set_opts(verbose = 1)
 
-## this will throw a error suggesting b is not defined properly
+set_opts(verbose = 1)
+## this will throw an error, suggesting b is not defined properly
 try(myfunc())
 }
 

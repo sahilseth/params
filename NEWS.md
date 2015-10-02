@@ -1,3 +1,8 @@
+p a r a m s    latest
+------------------------------------------------
+- updated documentation for read_sheet
+- write_sheet now handles multiple extensions
+
 p a r a m s    0.3.0    2015/09/22
 ------------------------------------------------
 - bug fix `load_opts`, so that only values in the 
