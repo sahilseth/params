@@ -1,4 +1,4 @@
-## Copied shamelessly from knitr, since it used xml rcurl dependencies.
+# Copied shamelessly from knitr (with Yihui's permission), in an attempt to reduce dependencies.
 
 
 
