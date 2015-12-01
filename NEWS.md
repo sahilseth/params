@@ -1,4 +1,4 @@
-p a r a m s    latest
+p a r a m s    0.4.0
 ------------------------------------------------
 - updated documentation for read_sheet
 - write_sheet now handles multiple extensions
