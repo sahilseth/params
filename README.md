@@ -112,6 +112,10 @@ install.packages("params")
 devtools::install_github("sahilseth/params")
 ```
 
+## Updates
+This package is under active-development, 
+you may watch for changes using
+the [watch link above](https://help.github.com/articles/watching-repositories/).
 
 **Here is a example conf file:**:
 
