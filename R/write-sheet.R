@@ -6,6 +6,8 @@ write_sheet <- function(x, file, ext, ...){
 	if(missing(ext))
 		ext <- file_ext(file)
 
+	dir.create(dirname(file), recursive = TRUE, showWarnings=FALSE)
+
 	if(ext %in% c("tsv", "txt", "conf", "def")){
 		write.table(x = x, file = file, sep = "\t", row.names = FALSE, quote = FALSE, ...)
 

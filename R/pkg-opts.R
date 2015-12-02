@@ -117,14 +117,10 @@ new_opts <- function(envir = new.env()){
 		params::get_opts(x, envir = envir)
 	}
 
-	#' @importFrom params set_opts
-	#' @export
 	set_opts <- function(..., .dots){
 		params::set_opts(..., .dots = .dots, envir = envir)
 	}
 
-	#' @importFrom params set_opts
-	#' @export
 	load_opts <- function(...){
 		params::load_opts(..., envir = envir)
 	}

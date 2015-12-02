@@ -1,16 +1,17 @@
 Package: params
 Type: Package
 Title: Simplify Parameters
-Description: An interface to simplify organizing parameters used in a package, using external configuration files.
-	This attempts to provide a cleaner alternative to options().
-Version: 0.3.1
+Description: An interface to simplify organizing parameters used in a package,
+    using external configuration files. This attempts to provide a cleaner
+    alternative to options().
+Version: 0.4
 Depends:
     R (>= 3.0.2),
     whisker
 Imports:
     utils
 Suggests:
-   openxlsx,
+    openxlsx,
     testthat
 License: GPL-2
 Authors@R: c(
@@ -19,3 +20,4 @@ Authors@R: c(
 		)
 URL: https://github.com/sahilseth/params
 BugReports: https://github.com/sahilseth/params/issues
+RoxygenNote: 5.0.1
