@@ -12,12 +12,12 @@ get_opt_env <- function(){
 
 #' @rdname params
 #' @export
-get_opts = function(x, envir = opts){
+get_opts = function(x, envir = opts, .use.names = FALSE){
 	if(missing(x))
 		x = ls(envir)
 	out = mget(x, envir = envir, ifnotfound = list(NULL))
 	if(length(x) == 1){
-		out = unlist(out, use.names = FALSE)
+		out = unlist(out, use.names = .use.names)
 	}else{
 		class(out) = c("opts", "list")
 	}
