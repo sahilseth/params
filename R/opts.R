@@ -17,7 +17,7 @@ get_opts = function(x, envir = opts){
 		x = ls(envir)
 	out = mget(x, envir = envir, ifnotfound = list(NULL))
 	if(length(x) == 1){
-		out = unlist(out)
+		out = unlist(out, use.names = FALSE)
 	}else{
 		class(out) = c("opts", "list")
 	}
