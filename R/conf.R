@@ -80,9 +80,10 @@ parse_opts <- function(lst, envir){
 		unlist(regmatches(x, gregexpr('(?<=\\{\\{)[[:alnum:]_.]+(?=\\}\\})', x, perl=TRUE)))
 	}
 
+	# get variables which need to be expanded
 	vars = get_vars(unlist(lst))
 	#x = get_opts(c("var", unlist(vars)), envir = envir) ## ensure, always a list
-	x = as.list(get_opts(vars), envir = envir) ## ensure, always a list
+	x = as.list(get_opts(vars, .use.names = TRUE), envir = envir) ## ensure, always a list
 
 	## if there are multiple elements with the same name
 	## this ensures we take the last/latest element

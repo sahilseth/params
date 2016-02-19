@@ -26,7 +26,7 @@
 #' @param check load_opts(): in case of a configuration file, whether to check if files defined in parameters exists. [TRUE]
 #' @param .parse set_opts(), load_opts(): logical, whether to auto-complete \code{{{myvar}}} using previously defined options. [TRUE]
 #' @param verbose load_opts(): Logical variable indicate level of verboseness [TRUE]
-
+#' @param .use.names get_opts(): The resulting vector should be have names (esp. if length(x) is 1). If length(x)>1, this returns a list.
 #' @details
 #'
 #' \strong{Integrating \link{params} in a package:}

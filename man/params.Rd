@@ -12,7 +12,7 @@
 load_opts(x, check = TRUE, envir = opts, verbose = TRUE, .parse = TRUE,
   ...)
 
-get_opts(x, envir = opts)
+get_opts(x, envir = opts, .use.names = FALSE)
 
 set_opts(..., .dots, .parse = TRUE, envir = opts)
 
@@ -35,6 +35,8 @@ new_opts(envir = new.env())
 \item{.parse}{set_opts(), load_opts(): logical, whether to auto-complete \code{{{myvar}}} using previously defined options. [TRUE]}
 
 \item{...}{set_opts(): a named set of variable/value pairs seperated by comma}
+
+\item{.use.names}{get_opts(): The resulting vector should be have names (esp. if length(x) is 1). If length(x)>1, this returns a list.}
 
 \item{.dots}{set_opts(): A named list, as a alternative to ...}
 }
