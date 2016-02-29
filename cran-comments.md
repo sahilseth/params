@@ -7,4 +7,10 @@
 ## Downstream dependencies
 
 - flowr: CRAN's version of flowr, installs and loads fine with this latest version 
-of params. I will be submitting a updated version of flowr as soon as params is accepted.
+of params.
+
+
+## checklist for self
+- check rerevdep_check()
+- version in DESCRIPTION (3)
+- update NEWS

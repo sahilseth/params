@@ -1,7 +1,7 @@
 p a r a m s    0.5.0
 ------------------------------------------------
 - get_opts output is fully compatible with getOption
-	- output is a un-named vector, for variable length = 1
+- output is a un-named vector, for variable length = 1
 
 p a r a m s    0.4.0
 ------------------------------------------------
