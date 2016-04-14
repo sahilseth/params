@@ -8,7 +8,7 @@ write_sheet <- function(x, file, ext, ...){
 
 	dir.create(dirname(file), recursive = TRUE, showWarnings=FALSE)
 
-	if(ext %in% c("tsv", "txt", "conf", "def")){
+	if(ext %in% c("tsv", "txt", "conf", "def", "mat")){
 		write.table(x = x, file = file, sep = "\t", row.names = FALSE, quote = FALSE, ...)
 
 	}else if(ext=="csv"){
