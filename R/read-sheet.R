@@ -93,7 +93,7 @@ read_sheet <- function(x, id_column, start_row = 1, sheet = 1, ext, header=TRUE,
 		mat = mat[,!grepl("^X", colnames(mat))]
 
 	}else{
-		stop("Sorry read_shet does not recognize this file format: ", ext, " please use tsv, csv or xlsx (sheetname: sample_sheet)")
+		stop("Sorry read_sheet does not recognize this file format: ", ext, " please use tsv, csv or xlsx (sheetname: sample_sheet)")
 	}
 
 	### ------ remove blank rows and columns
