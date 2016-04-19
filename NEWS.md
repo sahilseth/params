@@ -1,12 +1,16 @@
+p a r a m s    0.6.0
+------------------------------------------------
+- `read_sheet`, now recognizes `.mat` as a tsv
+
 p a r a m s    0.5.0
 ------------------------------------------------
-- get_opts output is fully compatible with getOption
+- `get_opts` output is fully compatible with getOption
 - output is a un-named vector, for variable length = 1
 
 p a r a m s    0.4.0
 ------------------------------------------------
 - updated documentation for read_sheet
-- write_sheet now handles multiple extensions
+- `write_sheet` now handles multiple extensions
 
 p a r a m s    0.3.0    2015/09/22
 ------------------------------------------------
