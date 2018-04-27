@@ -9,11 +9,26 @@
 #'
 #' @seealso make.names
 #'
-fix_names <- function (x, char = "."){
+fix_names <- function (x, char = "_"){
 
-	y <- gsub("_", char, as.character(x))
-	y <- gsub(" ", char, as.character(y))
-	y <- gsub("\\.", char, as.character(y))
+  x <- gsub("_", char, as.character(x), fixed = TRUE)
+  x <- gsub("-", char, as.character(x), fixed = TRUE)
+  x <- gsub(" ", char, as.character(x), fixed = TRUE)
+  x <- gsub(".", char, as.character(x), fixed = TRUE)
 
-	return(y)
+  return(x)
 }
+
+
+fix_column_names <- function(x, char = "_"){
+  x %<>% strsplit(split = "\n") %>% unlist() %>%
+    stringr::str_trim()
+
+  x = fix_names(x, char) %>% make.names() %>% tolower()
+
+  paste(x, collapse = "\n") %>% cat()
+  invisible(x)
+}
+
+
+
