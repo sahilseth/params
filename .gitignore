@@ -3,9 +3,7 @@
 .RData
 site
 *_cache
-
 params.Rproj
-
 .DS_Store
-
 tests/testthat/example2*
+.httr-oauth
