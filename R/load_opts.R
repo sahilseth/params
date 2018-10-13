@@ -105,7 +105,7 @@ parse_opts <- function(lst, envir){
 
 
 chk_conf <- function(x){
-  path_pattern = c("path$|dir$|exe$|file$")
+  path_pattern = c("path$|dir$|exe$|file$|jar$")
   pths = grep(path_pattern, names(x))
   mis_pths = !(file.exists(as.character(x)[pths]))
   if(sum(mis_pths) > 0){
