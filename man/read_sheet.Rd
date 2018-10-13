@@ -5,10 +5,10 @@
 \alias{write_sheet}
 \title{Read/Write sheets (automatically detect the file type and work accordingly)}
 \usage{
-read_sheet(x, id_column, start_row = 1, sheet = 1, ext, header = TRUE,
-  verbose = FALSE, ...)
+read_sheet(x, id_column, start_row = 1, sheet = 1, ext,
+  header = TRUE, verbose = FALSE, ...)
 
-write_sheet(x, file, ext, ...)
+write_sheet(x, file, ext, type = "", ...)
 }
 \arguments{
 \item{x}{read: path to a file, to be read. write: a data.frame}
@@ -76,4 +76,3 @@ write_sheet(sheet, "example.tsv")
 write_sheet(sheet, "example.xlsx")
 
 }
-

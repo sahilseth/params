@@ -14,4 +14,3 @@ parse_opts(lst, envir)
 \description{
 This function is internally called by \link{set_opts} and \link{load_opts}
 }
-

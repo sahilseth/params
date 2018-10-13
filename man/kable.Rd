@@ -45,4 +45,3 @@ Please refer to knitr's \link[knitr]{kable} function for details.
 \author{
 Yihui Xie \href{yihui.name}{http://yihui.name}
 }
-

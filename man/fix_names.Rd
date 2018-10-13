@@ -4,7 +4,7 @@
 \alias{fix_names}
 \title{fix_names}
 \usage{
-fix_names(x, char = ".")
+fix_names(x, char = "_")
 }
 \arguments{
 \item{x}{a vector of column names}
@@ -17,4 +17,3 @@ Replace special characters in column names of a data.frame
 \seealso{
 make.names
 }
-

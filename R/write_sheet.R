@@ -2,7 +2,7 @@
 #' @export
 #' @importFrom utils write.table
 #'
-write_sheet <- function(x, file, ext, ...){
+write_sheet <- function(x, file, ext, type = "", ...){
   if(missing(ext))
     ext <- file_ext(file)
 
@@ -19,17 +19,18 @@ write_sheet <- function(x, file, ext, ...){
       stop("openxlsx needed for this function to work. Please install it.",
            call. = FALSE)
     }
-    openxlsx::write.xlsx(x, file = file, colNames = TRUE, ...)
 
     if(type == "table"){
       if(!is.list(x))
         stop("x is not a list!")
 
       message("write to excel...")
-      wb <- createWorkbook()
-      sheets <- lapply(names(x), addWorksheet, wb = wb, gridLines = F)
-      tmp = map2(names(x), lst, writeDataTable, wb = wb, bandedRows = F, tableStyle = "TableStyleLight1")
-      saveWorkbook(wb, file, overwrite = T)
+      wb <- openxlsx::createWorkbook()
+      sheets <- lapply(names(x), openxlsx::addWorksheet, wb = wb, gridLines = F)
+      tmp = purrr::map2(names(x), x, openxlsx::writeDataTable, wb = wb, bandedRows = F, tableStyle = "TableStyleLight1")
+      openxlsx::saveWorkbook(wb, file, overwrite = T)
+    }else{
+      openxlsx::write.xlsx(x, file = file, colNames = TRUE, ...)
     }
 
   }else{
