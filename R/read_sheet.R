@@ -74,7 +74,7 @@ read_sheet <- function(x, id_column, start_row = 1, sheet = 1, ext, header=TRUE,
   if(missing(ext))
     ext <- file_ext(x)
 
-  if(ext %in% c("tsv", "txt", "conf", "def")){
+  if(ext %in% c("tsv", "txt", "conf", "def", "mat")){
     mat <- utils::read.table(x, as.is=TRUE, sep="\t", header=header, stringsAsFactors = FALSE,
                              comment.char = '#', strip.white=TRUE, blank.lines.skip=TRUE, ...)
 
