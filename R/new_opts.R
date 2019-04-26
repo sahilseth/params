@@ -125,6 +125,14 @@ new_opts <- function(envir = new.env()){
 		params::load_opts(..., envir = envir)
 	}
 
-	list(get=get_opts, set=set_opts, load = load_opts)
+	load_toml <- function(...){
+	  params::load_toml(..., envir = envir)
+
+	}
+
+	list(get=get_opts, set=set_opts, load = load_opts, load_toml = load_toml)
 
 }
+
+
+

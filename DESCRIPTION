@@ -4,7 +4,7 @@ Title: Simplify Parameters
 Description: An interface to simplify organizing parameters used in a package,
     using external configuration files. This attempts to provide a cleaner
     alternative to options().
-Version: 0.6.3.01
+Version: 0.6.3.2
 Depends:
     R (>= 3.0.2),
     whisker
