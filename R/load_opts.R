@@ -69,7 +69,7 @@ load_conf <- function(...){
 #' @param lst a list of configuration options to parse
 #' @inheritParams load_opts
 #'
-#' @import whisker
+#' @import glue
 #'
 parse_opts <- function(lst, envir){
 
@@ -83,7 +83,7 @@ parse_opts <- function(lst, envir){
   # get variables which need to be expanded
   vars = get_vars(unlist(lst))
   #x = get_opts(c("var", unlist(vars)), envir = envir) ## ensure, always a list
-  x = as.list(get_opts(vars, .use.names = TRUE), envir = envir) ## ensure, always a list
+  x = as.list(get_opts(vars, .use.names = TRUE, envir = envir)) ## ensure, always a list
 
   ## if there are multiple elements with the same name
   ## this ensures we take the last/latest element
@@ -97,8 +97,15 @@ parse_opts <- function(lst, envir){
   ## --- sequentially evaluae each configuration
   for(i in 1:length(lst)){
     ## resolve ONLY when neccesary
-    if(length(get_vars(lst[[i]])) > 0)
-      lst[[i]] = whisker.render(lst[[i]], lst, debug = TRUE)
+    if(length(get_vars(lst[[i]])) > 0){
+      # i = "gatk_preproc.baserecalib_opts"
+      # lst[[i]] = whisker.render(lst[[i]], lst, debug = TRUE)
+      # whisker is not updating, and has issues with . in names
+      # https://github.com/edwindj/whisker/issues/18
+      # https://github.com/edwindj/whisker/issues/24
+      lst[[i]] = glue::glue(lst[[i]], .envir = lst, .open = "{{{", .close = "}}}")
+      # lst[[i]] = glue::glue_data(.x = lst, ... = lst[[i]], .open = "{{{", .close = "}}}")
+    }
   }
   return(lst)
 }
