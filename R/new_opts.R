@@ -130,7 +130,7 @@ new_opts <- function(envir = new.env()){
 
 	}
 
-	list(get=get_opts, set=set_opts, load = load_opts, load_toml = load_toml)
+	list(get=get_opts, set=set_opts, load = load_opts, load_toml = load_toml, envir = envir)
 
 }
 
