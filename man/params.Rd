@@ -14,7 +14,7 @@
 load_opts(x, check = TRUE, envir = opts, verbose = TRUE,
   .parse = TRUE, ...)
 
-load_toml(toml, envir = envir)
+load_toml(toml, .remove_period = T, envir = envir)
 
 new_opts(envir = new.env())
 

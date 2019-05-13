@@ -43,7 +43,9 @@ get_opts = function(x, envir = opts, .use.names = FALSE){
 #' @importFrom tools assertCondition
 #'
 #' @export
-set_opts = function(..., .dots, .parse = TRUE, envir = opts){
+set_opts = function(..., .dots, .parse = TRUE,
+                    #.remove_period = T,
+                    envir = opts){
 
   dots = list(...)
 
@@ -66,13 +68,14 @@ set_opts = function(..., .dots, .parse = TRUE, envir = opts){
   if(.parse) ## auto-complete
     .dots = parse_opts(.dots, envir = envir)
 
-  nms = names(.dots)
-  vars_to_be_renamed = grep("\\.", nms, value = T)
-  if(length(vars_to_be_renamed) > 0){
-    message("found . in some variable names, convering to _: ",
-            paste0(head(vars_to_be_renamed), collapse = "\n"))
-
-  }
+  # if(.remove_period){
+  #   nms = names(.dots)
+  #   vars_to_be_renamed = grep("\\.", nms, value = T)
+  #   if(length(vars_to_be_renamed) > 0){
+  #     message("found . in some variable names, convering to _:\n",
+  #             paste0(head(vars_to_be_renamed, 2), collapse = "\n"))
+  #   }
+  # }
 
 
   list2env(.dots, envir = envir)

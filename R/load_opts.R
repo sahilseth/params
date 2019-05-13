@@ -1,7 +1,23 @@
+.remove_period_from_nms <- function(lst){
+  nms = names(lst)
+  vars_to_be_renamed = grep("\\.", nms, value = T)
+  if(length(vars_to_be_renamed) > 0){
+    message("found . in some variable names, convering to _:\n",
+            paste0(head(vars_to_be_renamed, 2), collapse = "\n"))
 
+    # append the list with new vars, with _ in their name
+    newnms = gsub("\\.", "\\_", vars_to_be_renamed)
+    new_vals = lst[vars_to_be_renamed]
+    names(new_vals) = newnms
+    # finally add them in
+    lst = c(lst, new_vals)
+  }
+  lst
+}
 
 #' @export
-.load_opts <- function(x, check, envir, verbose, .parse, ...){
+.load_opts <- function(x, check, envir, verbose, .parse,
+                       .remove_period = TRUE, ...){
 
   if(!file.exists(x)){
     message("Configuration file does not exist, loading skipped. Expecting a file at:", x)
@@ -20,6 +36,12 @@
   lst2 = get_opts(envir = envir, .use.names = TRUE)
   lst = c(lst2, lst1)
 
+  if(.remove_period){
+    # since we will have both variable names
+    # the parsing should work more easily
+    lst = .remove_period_from_nms(lst)
+  }
+
   if(.parse)
     lst = parse_opts(lst, envir = envir)
 
@@ -29,7 +51,9 @@
   }
 
   #options(lst)
-  set_opts(.dots = lst, envir = envir)
+  set_opts(.dots = lst,
+           #.remove_period = .remove_period,
+           envir = envir)
   #opts()$set(lst)
   ## -- populate these in the global environment
   invisible(get_opts(names(lst), envir = envir))
@@ -38,13 +62,16 @@
 #' @rdname params
 #' @seealso \link{read_sheet}
 #' @export
-load_opts <- function(x, check = TRUE, envir = opts, verbose = TRUE, .parse = TRUE, ...){
+load_opts <- function(x, check = TRUE, envir = opts,
+                      verbose = TRUE, .parse = TRUE, ...){
 
   if(missing(x))
     stop("Please supply path to a file to load as x")
 
   ## .load_opts: works on a single file
-  lst <- lapply(x, .load_opts, check = check, envir = envir, .parse = .parse, verbose = verbose,  ...)
+  lst <- lapply(x, .load_opts, check = check,
+                envir = envir, .parse = .parse,
+                verbose = verbose,  ...)
 
   ## only one conf file is read
   if(length(x) == 1)
@@ -85,7 +112,7 @@ parse_opts <- function(lst, envir){
 
   # get values of those variables from the environment
   # x = get_opts(c("var", unlist(vars)), envir = envir) ## ensure, always a list
-  x = as.list(get_opts(vars, .use.names = TRUE, envir = envir)) ## ensure, always a list
+  x = as.list(get_opts(vars, .use.names = TRUE, envir = envir)) # ensure, always a list
 
   ## if there are multiple elements with the same name
   ## this ensures we take the last/latest element

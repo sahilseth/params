@@ -3,12 +3,16 @@
 #'
 #' @importFrom RcppTOML parseToml
 #' @export
-load_toml <- function(toml, envir = envir){
+load_toml <- function(toml, .remove_period = T, envir = envir){
 
-
+  # get a flattened vector
   str_toml = unlist(parseToml(toml))
+  # convert into a named list
   lst_toml = split(str_toml, names(str_toml))
+  # convert . into _, and keep both variables (more busy, but less confusing)
+  if(.remove_period){
+    lst_toml = .remove_period_from_nms(lst_toml)
+  }
+  # finally set these into the env
   set_opts(.dots = lst_toml, .parse = TRUE, envir = envir)
-
-
 }
