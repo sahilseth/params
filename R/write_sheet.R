@@ -4,8 +4,12 @@
 #' @importFrom readr write_delim
 #'
 write_sheet <- function(x, file, ext, type = "", ...){
-  if(missing(ext))
-    ext <- file_ext(file)
+  if(missing(ext)){
+    # ext <- tools::file_ext(file)
+    filenm = tools::file_path_sans_ext(file, compression = T)
+    filenm = paste0(filenm, ".")
+    ext = gsub(filenm, "", file)
+  }
 
   dir.create(dirname(file), recursive = TRUE, showWarnings=FALSE)
 
