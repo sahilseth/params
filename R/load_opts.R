@@ -84,7 +84,7 @@ parse_opts <- function(lst, envir){
   vars = get_vars(unlist(lst))
 
   # get values of those variables from the environment
-  #x = get_opts(c("var", unlist(vars)), envir = envir) ## ensure, always a list
+  # x = get_opts(c("var", unlist(vars)), envir = envir) ## ensure, always a list
   x = as.list(get_opts(vars, .use.names = TRUE, envir = envir)) ## ensure, always a list
 
   ## if there are multiple elements with the same name

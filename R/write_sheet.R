@@ -1,6 +1,7 @@
 #' @rdname read_sheet
 #' @export
 #' @importFrom utils write.table
+#' @importFrom readr write_delim
 #'
 write_sheet <- function(x, file, ext, type = "", ...){
   if(missing(ext))
