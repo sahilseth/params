@@ -16,10 +16,23 @@ get_opts = function(x, envir = opts, .use.names = FALSE){
 	if(missing(x))
 		x = ls(envir)
 	out = mget(x, envir = envir, ifnotfound = list(NULL))
+
 	if(length(x) == 1){
+	  # need to get a value, if length is 1, we expect a single char. string
+	  # in new R, this is causing concat of names:
+	  # wex.bed.targets.pad250.intervals.wex.bed.targets.pad250.intervals
 		out = unlist(out, use.names = .use.names)
+
+		# lets try a simple fix (assumming len is 1)
+		# this needs more testing
+		# this fails testing, adding check on length of output out
+		if(length(out) == 1)
+		  names(out) = x
+
 	}else{
+
 		class(out) = c("opts", "list")
+
 	}
 	return(out)
 }

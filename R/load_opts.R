@@ -82,6 +82,8 @@ parse_opts <- function(lst, envir){
 
   # get variables which need to be expanded
   vars = get_vars(unlist(lst))
+
+  # get values of those variables from the environment
   #x = get_opts(c("var", unlist(vars)), envir = envir) ## ensure, always a list
   x = as.list(get_opts(vars, .use.names = TRUE, envir = envir)) ## ensure, always a list
 
