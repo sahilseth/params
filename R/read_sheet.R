@@ -70,7 +70,9 @@
 #' write_sheet(sheet, "example.xlsx")
 #'
 #' @export
-read_sheet <- function(x, id_column, start_row = 1, sheet = 1, ext, header=TRUE, verbose = FALSE,  ...){
+read_sheet <- function(x, id_column, start_row = 1,
+                       sheet = 1, ext, header=TRUE,
+                       verbose = FALSE,  ...){
   if(missing(ext))
     ext <- file_ext(x)
 
@@ -92,6 +94,10 @@ read_sheet <- function(x, id_column, start_row = 1, sheet = 1, ext, header=TRUE,
     mat <- openxlsx::read.xlsx(x, sheet = sheet, startRow = start_row, ...)
     message("Removing extra columns")
     mat = mat[,!grepl("^X", colnames(mat))]
+
+  }else if(ext=="rds"){
+
+    mat = readr::read_rds(x)
 
   }else{
     stop("Sorry read_sheet does not recognize this file format: ", ext, " please use tsv, csv or xlsx (sheetname: sample_sheet)")

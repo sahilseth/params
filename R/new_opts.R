@@ -113,24 +113,24 @@
 #'
 new_opts <- function(envir = new.env()){
 
-	get_opts <- function(x){
-		params::get_opts(x, envir = envir)
-	}
+  get_opts <- function(x){
+    params::get_opts(x, envir = envir)
+  }
 
-	set_opts <- function(..., .dots){
-		params::set_opts(..., .dots = .dots, envir = envir)
-	}
+  set_opts <- function(..., .dots){
+    params::set_opts(..., .dots = .dots, envir = envir)
+  }
 
-	load_opts <- function(...){
-		params::load_opts(..., envir = envir)
-	}
+  load_opts <- function(...){
+    params::load_opts(..., envir = envir)
+  }
 
-	load_toml <- function(...){
-	  params::load_toml(..., envir = envir)
+  load_toml <- function(...){
+    params::load_toml(..., envir = envir)
 
-	}
+  }
 
-	list(get=get_opts, set=set_opts, load = load_opts, load_toml = load_toml, envir = envir)
+  list(get=get_opts, set=set_opts, load = load_opts, load_toml = load_toml, envir = envir)
 
 }
 
