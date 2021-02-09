@@ -14,12 +14,12 @@ write_sheet <- function(x, file, ext, type = "", ...){
   dir.create(dirname(file), recursive = TRUE, showWarnings=FALSE)
 
   if(ext %in% c("tsv", "txt", "conf", "def", "mat", "tsv.gz", "tsv.xz", "tsv.bz2")){
-    write_delim(x = x, path = file, delim = "\t", quote_escape = "double", ...)
+    write_delim(x = x, file = file, delim = "\t", quote_escape = "double", ...)
 
     # write.table(x = x, file = file, sep = "\t", row.names = FALSE, quote = FALSE, ...)
 
   }else if(ext %in% c("csv", "csv.gz", "csv.bz2", "csv.xz")){
-    write_delim(x = x, path = file, delim = ",", quote_escape = "double", ...)
+    write_delim(x = x, file = file, delim = ",", quote_escape = "double", ...)
 
     #write.table(x = x, file = file, sep = ",", row.names = FALSE, quote = FALSE, ...)
 
