@@ -1,6 +1,8 @@
 p a r a m s    0.6.0
 ------------------------------------------------
 - `read_sheet`, now recognizes `.mat` as a tsv
+- `load_opts`, now does a file check for options like:
+  - `_exe`, `_dir`, `_path`, `_file`
 
 p a r a m s    0.5.0
 ------------------------------------------------

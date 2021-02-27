@@ -1,8 +1,25 @@
+.remove_period_from_nms <- function(lst, verbose){
+  nms = names(lst)
+  vars_to_be_renamed = grep("\\.", nms, value = T)
+  if(length(vars_to_be_renamed) > 0){
+    if(verbose)
+      message("found . in some variable names, convering to _:\n",
+              paste0(head(vars_to_be_renamed, 2), collapse = "\n"))
 
+    # append the list with new vars, with _ in their name
+    newnms = gsub("\\.", "\\_", vars_to_be_renamed)
+    new_vals = lst[vars_to_be_renamed]
+    names(new_vals) = newnms
+    # finally add them in
+    lst = c(lst, new_vals)
+  }
+  lst
+}
 
 #' @export
-.load_opts <- function(x, check, envir, verbose, .parse, ...){
-  
+.load_opts <- function(x, check, envir, verbose, .parse,
+                       .remove_period = TRUE, ...){
+
   if(!file.exists(x)){
     message("Configuration file does not exist, loading skipped. Expecting a file at:", x)
     return()
@@ -11,25 +28,33 @@
   if(class(conf) == "try-error")
     stop("error in read_sheet \nThere was a problem reading this file: ", x, "\nMake sure that all lines are two columns ",
          "seperated by TAB. ")
-  
+
   colnames(conf) = c("name", "value")
   lst1 = as.list(conf$value)
   names(lst1) = conf$name
-  
+
   ## for auto-completion its best to have
   lst2 = get_opts(envir = envir, .use.names = TRUE)
   lst = c(lst2, lst1)
-  
+
+  if(.remove_period){
+    # since we will have both variable names
+    # the parsing should work more easily
+    lst = .remove_period_from_nms(lst)
+  }
+
   if(.parse)
     lst = parse_opts(lst, envir = envir)
-  
+
   ## -- check the ones with file paths
   if(check){
     tmp <- chk_conf(lst[names(lst) %in% names(lst1)])
   }
-  
+
   #options(lst)
-  set_opts(.dots = lst, envir = envir)
+  set_opts(.dots = lst,
+           #.remove_period = .remove_period,
+           envir = envir)
   #opts()$set(lst)
   ## -- populate these in the global environment
   invisible(get_opts(names(lst), envir = envir))
@@ -38,18 +63,21 @@
 #' @rdname params
 #' @seealso \link{read_sheet}
 #' @export
-load_opts <- function(x, check = TRUE, envir = opts, verbose = TRUE, .parse = TRUE, ...){
-  
+load_opts <- function(x, check = TRUE, envir = opts,
+                      verbose = TRUE, .parse = TRUE, ...){
+
   if(missing(x))
     stop("Please supply path to a file to load as x")
-  
+
   ## .load_opts: works on a single file
-  lst <- lapply(x, .load_opts, check = check, envir = envir, .parse = .parse, verbose = verbose,  ...)
-  
+  lst <- lapply(x, .load_opts, check = check,
+                envir = envir, .parse = .parse,
+                verbose = verbose,  ...)
+
   ## only one conf file is read
   if(length(x) == 1)
     lst = lst[[1]]
-  
+
   ## return them as a list
   invisible(lst)
 }
@@ -69,43 +97,52 @@ load_conf <- function(...){
 #' @param lst a list of configuration options to parse
 #' @inheritParams load_opts
 #'
-#' @import whisker
+#' @import glue
 #'
 parse_opts <- function(lst, envir){
-  
+
   ## get values from previous envir
   ## which are being called by name in newer options
   ## example {{{mydir}}}
   get_vars <- function(x){
     unlist(regmatches(x, gregexpr('(?<=\\{\\{)[[:alnum:]_.]+(?=\\}\\})', x, perl=TRUE)))
   }
-  
+
   # get variables which need to be expanded
   vars = get_vars(unlist(lst))
-  #x = get_opts(c("var", unlist(vars)), envir = envir) ## ensure, always a list
-  x = as.list(get_opts(vars, .use.names = TRUE), envir = envir) ## ensure, always a list
-  
+
+  # get values of those variables from the environment
+  # x = get_opts(c("var", unlist(vars)), envir = envir) ## ensure, always a list
+  x = as.list(get_opts(vars, .use.names = TRUE, envir = envir)) # ensure, always a list
+
   ## if there are multiple elements with the same name
   ## this ensures we take the last/latest element
   lst = c(x, lst)
   lst = rev(lst)
   lst = lst[!duplicated(names(lst))]
-  
+
   ## handling duplicates
   ## if a option is set multiple times, we consider the last one.
-  
+
   ## --- sequentially evaluae each configuration
   for(i in 1:length(lst)){
     ## resolve ONLY when neccesary
-    if(length(get_vars(lst[[i]])) > 0)
-      lst[[i]] = whisker.render(lst[[i]], lst, debug = TRUE)
+    if(length(get_vars(lst[[i]])) > 0){
+      # i = "gatk_preproc.baserecalib_opts"
+      # lst[[i]] = whisker.render(lst[[i]], lst, debug = TRUE)
+      # whisker is not updating, and has issues with . in names
+      # https://github.com/edwindj/whisker/issues/18
+      # https://github.com/edwindj/whisker/issues/24
+      lst[[i]] = glue::glue(lst[[i]], .envir = lst, .open = "{{{", .close = "}}}")
+      # lst[[i]] = glue::glue_data(.x = lst, ... = lst[[i]], .open = "{{{", .close = "}}}")
+    }
   }
   return(lst)
 }
 
 
 chk_conf <- function(x){
-  path_pattern = c("path$|dir$|exe$")
+  path_pattern = c("path$|dir$|exe$|file$|jar$")
   pths = grep(path_pattern, names(x))
   mis_pths = !(file.exists(as.character(x)[pths]))
   if(sum(mis_pths) > 0){

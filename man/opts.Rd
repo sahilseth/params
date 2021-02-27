@@ -12,4 +12,3 @@ opts
 default opts
 }
 \keyword{datasets}
-

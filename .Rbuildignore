@@ -4,6 +4,6 @@
 README.html
 README.Rmd
 ^cran-comments\.md$
-
 cran-comments.md
 params.Rproj
+^\.httr-oauth$
