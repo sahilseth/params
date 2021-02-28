@@ -8,3 +8,4 @@ cran-comments.md
 params.Rproj
 ^\.httr-oauth$
 ^\.github$
+^CRAN-RELEASE$
