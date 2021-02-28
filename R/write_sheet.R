@@ -52,10 +52,10 @@ write_sheet <- function(x, file, ext, type = "", ...){
 
 
 write_sheets <- function(lst, file){
-  wb <- createWorkbook()
-  sheets <- lapply(names(lst), addWorksheet, wb = wb, gridLines = F)
-  tmp = map2(names(lst), lst, writeDataTable, wb = wb, bandedRows = F, tableStyle = "TableStyleLight1")
-  saveWorkbook(wb, file, overwrite = T)
+  wb <- openxlsx::createWorkbook()
+  sheets <- lapply(names(lst), openxlsx::addWorksheet, wb = wb, gridLines = F)
+  tmp = map2(names(lst), lst, openxlsx::writeDataTable, wb = wb, bandedRows = F, tableStyle = "TableStyleLight1")
+  openxlsx::saveWorkbook(wb, file, overwrite = T)
 
 }
 

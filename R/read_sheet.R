@@ -20,7 +20,6 @@
 #' @param ext determined using file extention. Specifying will override
 #'
 #' @param id_column all rows which have this column as blank are skipped. See details.
-#' @param ... passed onto read.xlsx of openxlsx, read.table or read.csv2 depending on the file type.
 #'
 #' @param start_row supplied to read.xlsx
 #' @param sheet supplied to read.xlsx, index or name of the sheet to be read from excel file. See \link[openxlsx]{read.xlsx}
@@ -29,6 +28,10 @@
 #'
 #' @param file write: output file name.
 #' @param verbose verbosity level.
+#'
+#' @param type in case of writing an xlsx file, should the data.frame to written as excel 'table'. ['table']
+#'
+#' @param ... passed onto read.xlsx of openxlsx, read.table or read.csv2 depending on the file type.
 #'
 #' @details
 #'
@@ -60,6 +63,8 @@
 #'
 #' # write sheets -------
 #'
+#' \dontrun{
+#' # throws a R CMD check note - don't run
 #' ## write a comma seperated sheet
 #' write_sheet(sheet, "example.csv")
 #'
@@ -68,6 +73,7 @@
 #'
 #' ## write an excel seperated sheet
 #' write_sheet(sheet, "example.xlsx")
+#' }
 #'
 #' @export
 read_sheet <- function(x, id_column, start_row = 1,
@@ -103,7 +109,7 @@ read_sheet <- function(x, id_column, start_row = 1,
     stop("Sorry read_sheet does not recognize this file format: ", ext, " please use tsv, csv or xlsx (sheetname: sample_sheet)")
   }
 
-  ### ------ remove blank rows and columns
+  # remove blank rows and columns
   if(missing(id_column)) {
     id_column = 1
     if(verbose)

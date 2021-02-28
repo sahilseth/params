@@ -36,6 +36,8 @@ write_sheet(x, file, ext, type = "", ...)
 \item{...}{passed onto read.xlsx of openxlsx, read.table or read.csv2 depending on the file type.}
 
 \item{file}{write: output file name.}
+
+\item{type}{in case of writing an xlsx file, should the data.frame to written as excel 'table'. ['table']}
 }
 \description{
 Read/Write sheets (automatically detect the file type and work accordingly)
@@ -74,6 +76,8 @@ tsv = read_sheet(system.file("extdata/example.tsv", package = "params"))
 
 # write sheets -------
 
+\dontrun{
+# throws a R CMD check note - don't run
 ## write a comma seperated sheet
 write_sheet(sheet, "example.csv")
 
@@ -82,5 +86,6 @@ write_sheet(sheet, "example.tsv")
 
 ## write an excel seperated sheet
 write_sheet(sheet, "example.xlsx")
+}
 
 }

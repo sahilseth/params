@@ -1,10 +1,12 @@
+
+#' @importFrom utils head
 .remove_period_from_nms <- function(lst, verbose){
   nms = names(lst)
   vars_to_be_renamed = grep("\\.", nms, value = T)
   if(length(vars_to_be_renamed) > 0){
     if(verbose)
       message("found . in some variable names, convering to _:\n",
-              paste0(head(vars_to_be_renamed, 2), collapse = "\n"))
+              paste0(utils::head(vars_to_be_renamed, 2), collapse = "\n"))
 
     # append the list with new vars, with _ in their name
     newnms = gsub("\\.", "\\_", vars_to_be_renamed)

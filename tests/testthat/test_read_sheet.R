@@ -1,3 +1,10 @@
+# https://r-pkgs.org/data.html#data-extdata
+# Data for tests: it’s ok to put small files directly in your test directory.
+# But remember unit tests are for testing correctness, not performance, so keep the size small.
+#
+# Data for vignettes. If you want to show how to work with an already loaded dataset, put that data in data/.
+# If you want to show how to load raw data, put that data in inst/extdata.
+#
 
 
 context("read_sheet")

@@ -20,7 +20,7 @@ Suggests:
 License: GPL-2
 Authors@R: c(
 		person("Sahil", "Seth", role = c("aut", "cre"), email = "me@sahilseth.com"),
-    person("Yihui", "Xie", role = c("ctb"), comment = "kable from knitr R/table.R")
+		person("Yihui", "Xie", role = c("ctb"), comment = "kable from knitr R/table.R")
 		)
 URL: https://github.com/sahilseth/params
 BugReports: https://github.com/sahilseth/params/issues

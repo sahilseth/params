@@ -11,6 +11,7 @@
 #'
 fix_names <- function (x, char = "_"){
 
+  x <- gsub("\\ ", "", as.character(x), fixed = TRUE)
   x <- gsub("_", char, as.character(x), fixed = TRUE)
   x <- gsub("-", char, as.character(x), fixed = TRUE)
   x <- gsub(" ", char, as.character(x), fixed = TRUE)
@@ -20,13 +21,23 @@ fix_names <- function (x, char = "_"){
 }
 
 
+#' fix_column_names
+#'
+#' removes special chars from names
+#'
+#' @param x a character vector
+#' @param char replace special characters with this symbol
+#'
 fix_column_names <- function(x, char = "_"){
-  x %<>% strsplit(split = "\n") %>% unlist() %>%
-    stringr::str_trim()
+  x = strsplit(x, split = "\n")
+  x = unlist(x)# %>%
+    #stringr::str_trim()
 
-  x = fix_names(x, char) %>% make.names() %>% tolower()
+  x = fix_names(x, char)
+  x = make.names(x)
+  x = tolower(x)
 
-  paste(x, collapse = "\n") %>% cat()
+  cat(paste(x, collapse = "\n"))
   invisible(x)
 }
 
