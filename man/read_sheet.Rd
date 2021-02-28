@@ -5,8 +5,16 @@
 \alias{write_sheet}
 \title{Read/Write sheets (automatically detect the file type and work accordingly)}
 \usage{
-read_sheet(x, id_column, start_row = 1, sheet = 1, ext,
-  header = TRUE, verbose = FALSE, ...)
+read_sheet(
+  x,
+  id_column,
+  start_row = 1,
+  sheet = 1,
+  ext,
+  header = TRUE,
+  verbose = FALSE,
+  ...
+)
 
 write_sheet(x, file, ext, type = "", ...)
 }

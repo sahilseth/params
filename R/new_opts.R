@@ -10,7 +10,7 @@
 #' \itemize{
 #' \item set_opts(): set options into a custom envir
 #' \item get_opts(): extract options
-#' \item load_opts(): Read a tab delimted file using \link{read_sheet} and load them as options using \link{set_opts}
+#' \item load_opts(): Read a tab delimted file using \link{read_sheet} or toml file and load them as options using \link{set_opts}
 #' \item new_opts(): create a options manager to be included in a pacakge
 #' \item print.opts(): print pkg options as a pretty table
 #'}
@@ -27,6 +27,8 @@
 #' @param .parse set_opts(), load_opts(): logical, whether to auto-complete \code{{{myvar}}} using previously defined options. [TRUE]
 #' @param verbose load_opts(): Logical variable indicate level of verboseness [TRUE]
 #' @param .use.names get_opts(): The resulting vector should be have names (esp. if length(x) is 1). If length(x)>1, this returns a list.
+#' @param .remove_period load_opts(): remove \\. period from option names (and replace with _)
+#' @param toml load_toml(): instead of a tsv, use toml to load options
 #' @details
 #'
 #' \strong{Integrating \link{params} in a package:}
@@ -127,7 +129,6 @@ new_opts <- function(envir = new.env()){
 
   load_toml <- function(...){
     params::load_toml(..., envir = envir)
-
   }
 
   list(get=get_opts, set=set_opts, load = load_opts, load_toml = load_toml, envir = envir)
