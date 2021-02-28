@@ -1,8 +1,8 @@
 ## Test environments
-* local OS X install, R 3.2.4
-* ubuntu 12.04 (on travis-ci), R 3.2.4
-* win-builder (release)
-* Rdevel version using rocker/r-devel
+* local OS X install, 4.0
+* ubuntu 16.04 R 3.5, 3.6, 4.0, devel
+* win-builder R 4.0
+* macos R 4.0
 
 
 ## Downstream dependencies
