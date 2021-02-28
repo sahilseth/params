@@ -11,10 +11,9 @@
 \alias{print.opts}
 \title{Setting/loading and extracting various options into the environment}
 \usage{
-load_opts(x, check = TRUE, envir = opts, verbose = TRUE,
-  .parse = TRUE, ...)
+load_opts(x, check = TRUE, envir = opts, verbose = TRUE, .parse = TRUE, ...)
 
-load_toml(toml, .remove_period = T, envir = envir)
+load_toml(toml, .remove_period = T, envir = envir, verbose = T)
 
 new_opts(envir = new.env())
 
@@ -40,6 +39,10 @@ set_opts(..., .dots, .parse = TRUE, envir = opts)
 
 \item{...}{set_opts(): a named set of variable/value pairs seperated by comma}
 
+\item{toml}{load_toml(): instead of a tsv, use toml to load options}
+
+\item{.remove_period}{load_opts(): remove \\. period from option names (and replace with _)}
+
 \item{.use.names}{get_opts(): The resulting vector should be have names (esp. if length(x) is 1). If length(x)>1, this returns a list.}
 
 \item{.dots}{set_opts(): A named list, as a alternative to ...}
@@ -48,7 +51,7 @@ set_opts(..., .dots, .parse = TRUE, envir = opts)
 \itemize{
 \item set_opts(): set options into a custom envir
 \item get_opts(): extract options
-\item load_opts(): Read a tab delimted file using \link{read_sheet} and load them as options using \link{set_opts}
+\item load_opts(): Read a tab delimted file using \link{read_sheet} or toml file and load them as options using \link{set_opts}
 \item new_opts(): create a options manager to be included in a pacakge
 \item print.opts(): print pkg options as a pretty table
 }

@@ -2,7 +2,7 @@
 #' @export
 #' @importFrom utils write.table
 #' @importFrom readr write_delim
-#'
+#' @importFrom purrr map2
 write_sheet <- function(x, file, ext, type = "", ...){
   if(missing(ext)){
     # ext <- tools::file_ext(file)

@@ -98,6 +98,7 @@ load_conf <- function(...){
 #' @inheritParams load_opts
 #'
 #' @import glue
+#' @import whisker
 #'
 parse_opts <- function(lst, envir){
 
