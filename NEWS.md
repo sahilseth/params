@@ -1,3 +1,13 @@
+p a r a m s    0.7.0
+------------------------------------------------
+- `load_opts`, now support TOML files. These are now the recommended conf file type
+- `read_sheet`/`write_sheet`
+  - now supports rds files as well.
+  - extract extensions from gzipped files (like tsv.gz)
+  - write out tsv.gz files
+  - `.mat` is assumed to be a `tsv` file
+- excel: support writing out excel tables by supplying a list of `data.frames`
+
 p a r a m s    0.6.0
 ------------------------------------------------
 - `read_sheet`, now recognizes `.mat` as a tsv

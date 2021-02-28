@@ -18,4 +18,6 @@ of params.
 - version in DESCRIPTION (3)
 - update NEWS
 
+# submit to cran
+devtools::submit_cran()
 --->
