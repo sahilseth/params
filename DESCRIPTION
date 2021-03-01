@@ -7,8 +7,7 @@ Description: An interface to simplify organizing parameters used in a package,
 Version: 0.7.3
 Depends:
     R (>= 3.0.2),
-    whisker,
-    utf8
+    whisker
 Imports:
     utils,
     RcppTOML,
@@ -17,7 +16,9 @@ Imports:
     purrr
 Suggests:
     openxlsx,
-    testthat
+    testthat,
+    knitr,
+    utf8
 License: GPL-2
 Authors@R: c(
 		person("Sahil", "Seth", role = c("aut", "cre"), email = "me@sahilseth.com"),
