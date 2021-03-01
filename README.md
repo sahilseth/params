@@ -8,7 +8,7 @@ p a r a m s
 [![](http://www.r-pkg.org/badges/version/params)](https://cran.r-project.org/package=params)
 ![](http://cranlogs.r-pkg.org/badges/grand-total/params)
 
-**[sahilseth.github.io/params](http://sahilseth.github.io/params)**
+**[sahilseth.github.io/params](http://sahilseth.com/params)**
 
 ## Rationale
 > Setting/loading and extracting various options from/into the R environment

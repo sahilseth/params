@@ -52,5 +52,5 @@ This is a trimmed down version of the original kable function in knitr package.
 Please refer to knitr's \link[knitr]{kable} function for details.
 }
 \author{
-Yihui Xie \href{yihui.name}{http://yihui.name}
+Yihui Xie \href{http://yihui.name}{http://yihui.name}
 }
