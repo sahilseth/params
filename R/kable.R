@@ -72,7 +72,7 @@ escape_latex = function(x, newlines = FALSE, spaces = FALSE) {
 #'
 #'
 #' @export
-#' @author Yihui Xie \href{yihui.name}{http://yihui.name}
+#' @author Yihui Xie \href{http://yihui.name}{http://yihui.name}
 #'
 kable = function(
 	x, format, digits = getOption('digits'), row.names = NA, col.names = colnames(x),

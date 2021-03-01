@@ -13,7 +13,7 @@ p a r a m s
 ## Rationale
 > Setting/loading and extracting various options from/into the R environment
 
-> A package level alternative for `options` and `getOptions`, to prevent cluterring the space. 
+> A package level alternative for `options` and `getOptions`, to prevent cluttering the space. 
 
 ## Main Features
 

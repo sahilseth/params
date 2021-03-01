@@ -10,7 +10,7 @@
 #' \itemize{
 #' \item set_opts(): set options into a custom envir
 #' \item get_opts(): extract options
-#' \item load_opts(): Read a tab delimted file using \link{read_sheet} or toml file and load them as options using \link{set_opts}
+#' \item load_opts(): Read a tab delimited file using \link{read_sheet} or toml file and load them as options using \link{set_opts}
 #' \item new_opts(): create a options manager to be included in a pacakge
 #' \item print.opts(): print pkg options as a pretty table
 #'}
@@ -20,7 +20,7 @@
 #' \item load_opts: path to a configuration file
 #' }
 #'
-#' @param ... set_opts(): a named set of variable/value pairs seperated by comma
+#' @param ... set_opts(): a named set of variable/value pairs separated by comma
 #' @param .dots set_opts(): A named list, as a alternative to ...
 #' @param envir environ used to store objects. Default is a environ object called opts [params:::opts]
 #' @param check load_opts(): in case of a configuration file, whether to check if files defined in parameters exists. [TRUE]
@@ -59,11 +59,11 @@
 #'
 #'
 #' There are cases when options and params are actually paths to scripts or other apps or folders etc.
-#' In such cases it might be useful to quickly check if these paths exists on the sytem.
+#' In such cases it might be useful to quickly check if these paths exists on the system.
 #' As such, \link{load_opts}() automatically checks params ending with \code{path|dir|exe} (if check=TRUE).
 #'
 #' For example, values for variables like \code{mypath}, \code{my_path}, \code{tool_exe}, etc would be check if they exists
-#' and a warning would be shown if they dont exist.
+#' and a warning would be shown if they don't exist.
 #'
 #'
 #' Below is a list example options, retrieved via

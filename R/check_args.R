@@ -1,4 +1,4 @@
-#' Assert none of the arguemnts of a function are null.
+#' Assert none of the arguments of a function are null.
 #'
 #' Checks all the arguments in the parent function and makes sure that none of them
 #' are NULL

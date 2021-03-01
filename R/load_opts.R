@@ -29,7 +29,7 @@
   conf <- try(read_sheet(x, allowEscape = TRUE, header = FALSE, verbose = verbose))
   if(class(conf) == "try-error")
     stop("error in read_sheet \nThere was a problem reading this file: ", x, "\nMake sure that all lines are two columns ",
-         "seperated by TAB. ")
+         "separated by TAB. ")
 
   colnames(conf) = c("name", "value")
   lst1 = as.list(conf$value)

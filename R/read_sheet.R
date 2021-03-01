@@ -17,7 +17,7 @@
 #' }
 #'
 #' @param x read: path to a file, to be read. write: a data.frame
-#' @param ext determined using file extention. Specifying will override
+#' @param ext determined using file extension. Specifying will override
 #'
 #' @param id_column all rows which have this column as blank are skipped. See details.
 #'
@@ -54,10 +54,10 @@
 #' ## read a excel sheet
 #' sheet = read_sheet(system.file("extdata/example.xlsx", package = "params"))
 #'
-#' ## read a comma seperated sheet
+#' ## read a comma separated sheet
 #' csv = read_sheet(system.file("extdata/example.csv", package = "params"))
 #'
-#' ## read a tab seperate sheet
+#' ## read a tab separate sheet
 #' tsv = read_sheet(system.file("extdata/example.tsv", package = "params"))
 #'
 #'
@@ -65,13 +65,13 @@
 #'
 #' \dontrun{
 #' # throws a R CMD check note - don't run
-#' ## write a comma seperated sheet
+#' ## write a comma separated sheet
 #' write_sheet(sheet, "example.csv")
 #'
-#' ## write a tab seperated sheet
+#' ## write a tab separated sheet
 #' write_sheet(sheet, "example.tsv")
 #'
-#' ## write an excel seperated sheet
+#' ## write an excel separated sheet
 #' write_sheet(sheet, "example.xlsx")
 #' }
 #'
