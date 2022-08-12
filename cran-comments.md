@@ -9,9 +9,6 @@
 
 - flowr: CRAN's version of flowr, installs and loads fine with this latest version 
 of params.
-- URL: http://sahilseth.github.io/params is the actual source and more stable. 
-The website is hosted at github.com and sahilseth.com is just an alias.
-Could I keep the url as http://sahilseth.github.io/params?
 
 <!---notes to self:
 
@@ -20,6 +17,10 @@ Could I keep the url as http://sahilseth.github.io/params?
 - version in DESCRIPTION (3)
 - update NEWS
 
+# check urls:
+devtools::check(manual = TRUE, remote = TRUE, incoming = TRUE)
+  
 # submit to cran
 devtools::submit_cran()
 --->
+
