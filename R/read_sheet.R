@@ -80,7 +80,7 @@ read_sheet <- function(x, id_column, start_row = 1,
                        sheet = 1, ext, header=TRUE,
                        verbose = FALSE,  ...){
   if(missing(ext))
-    ext <- file_ext(x)
+    ext <- tools::file_ext(x)
 
   if(ext %in% c("tsv", "txt", "conf", "def", "mat")){
     mat <- utils::read.table(x, as.is=TRUE, sep="\t", header=header, stringsAsFactors = FALSE,
@@ -92,12 +92,12 @@ read_sheet <- function(x, id_column, start_row = 1,
                            quote = "",
                            comment.char = '#', strip.white=TRUE, blank.lines.skip=TRUE, ...)
 
-  }else if(ext=="xlsx"){
-    if (!requireNamespace('openxlsx', quietly = TRUE)) {
-      stop("openxlsx needed for this function to work. Please install it.",
+  }else if(ext %in% c("xlsx", "xls")){
+    if (!requireNamespace('readxl', quietly = TRUE)) {
+      stop("readxl needed for this function to work. Please install it.",
            call. = FALSE)
     }
-    mat <- openxlsx::read.xlsx(x, sheet = sheet, startRow = start_row, ...)
+    mat <- readxl::read_excel(x, sheet = sheet, skip = start_row-1, ...)
     message("Removing extra columns")
     mat = mat[,!grepl("^X", colnames(mat))]
 
