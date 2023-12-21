@@ -26,7 +26,7 @@
     message("Configuration file does not exist, loading skipped. Expecting a file at:", x)
     return()
   }
-  conf <- try(read_sheet(x, allowEscape = TRUE, header = FALSE, verbose = verbose))
+  conf <- try(read_sheet(x, allowEscapes = TRUE, header = FALSE, verbose = verbose))
   if(class(conf) == "try-error")
     stop("error in read_sheet \nThere was a problem reading this file: ", x, "\nMake sure that all lines are two columns ",
          "separated by TAB. ")
