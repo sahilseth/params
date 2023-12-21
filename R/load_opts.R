@@ -26,7 +26,7 @@
     message("Configuration file does not exist, loading skipped. Expecting a file at:", x)
     return()
   }
-  conf <- try(read_sheet(x, allowEscape = TRUE, header = FALSE, verbose = verbose))
+  conf <- try(read_sheet(x, allowEscapes = TRUE, header = FALSE, verbose = verbose))
   if(class(conf) == "try-error")
     stop("error in read_sheet \nThere was a problem reading this file: ", x, "\nMake sure that all lines are two columns ",
          "separated by TAB. ")
@@ -136,8 +136,8 @@ parse_opts <- function(lst, envir){
       # whisker is not updating, and has issues with . in names
       # https://github.com/edwindj/whisker/issues/18
       # https://github.com/edwindj/whisker/issues/24
-      lst[[i]] = glue::glue(lst[[i]], .envir = lst, .open = "{{{", .close = "}}}")
-      # lst[[i]] = glue::glue_data(.x = lst, ... = lst[[i]], .open = "{{{", .close = "}}}")
+      #lst[[i]] = glue::glue(lst[[i]], .envir = lst, .open = "{{{", .close = "}}}")
+      lst[[i]] = glue::glue_data(.x = lst, lst[[i]], .open = "{{{", .close = "}}}")
     }
   }
   return(lst)
