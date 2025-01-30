@@ -4,7 +4,7 @@ Title: Simplify Parameters
 Description: An interface to simplify organizing parameters used in a package,
     using external configuration files. This attempts to provide a cleaner
     alternative to options().
-Version: 0.7.4
+Version: 0.7.5
 Depends:
     R (>= 3.0.2),
     whisker
@@ -16,6 +16,7 @@ Imports:
     purrr
 Suggests:
     openxlsx,
+    readxl,
     testthat,
     knitr,
     utf8
@@ -26,5 +27,6 @@ Authors@R: c(
 		)
 URL: https://github.com/sahilseth/params
 BugReports: https://github.com/sahilseth/params/issues
-RoxygenNote: 7.1.1
+RoxygenNote: 7.3.2
+Encoding: UTF-8
 Language: en-US

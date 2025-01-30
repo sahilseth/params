@@ -94,7 +94,7 @@ print.opts <- function(x, ...){
       Filter(Negate(is.null), f)
     }))
     y = try(data.frame(name = rownames(y), value = y, row.names = NULL, stringsAsFactors = FALSE), silent = TRUE)
-    if(class(y) == "try-error"){
+    if(inherits(y, "try-error")){
       message("some options not found, unable to create a pretty table, returning a simple list.")
       class(x) = "list"
       print(x)
