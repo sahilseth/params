@@ -127,7 +127,7 @@ parse_opts <- function(lst, envir){
   ## handling duplicates
   ## if a option is set multiple times, we consider the last one.
 
-  ## --- sequentially evaluae each configuration
+  ## --- sequentially evaluate each configuration
   for(i in 1:length(lst)){
     ## resolve ONLY when neccesary
     if(length(get_vars(lst[[i]])) > 0){
@@ -136,8 +136,8 @@ parse_opts <- function(lst, envir){
       # whisker is not updating, and has issues with . in names
       # https://github.com/edwindj/whisker/issues/18
       # https://github.com/edwindj/whisker/issues/24
-      lst[[i]] = glue::glue(lst[[i]], .envir = lst, .open = "{{{", .close = "}}}")
-      # lst[[i]] = glue::glue_data(.x = lst, ... = lst[[i]], .open = "{{{", .close = "}}}")
+      env_lst = as.environment(lst)
+      lst[[i]] = glue::glue(lst[[i]], .envir = env_lst, .open = "{{{", .close = "}}}")
     }
   }
   return(lst)
