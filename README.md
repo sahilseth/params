@@ -3,8 +3,8 @@ p a r a m s
 ------------------
 
 
-<!----[![Build Status](https://travis-ci.org/sahilseth/params.svg)](https://travis-ci.org/sahilseth/params)---->
-[![](https://github.com/sahilseth/params/workflows/R-CMD-check/badge.svg)](https://github.com/sahilseth/params/actions)
+[![R-CMD-check.yaml](https://github.com/sahilseth/params/actions/workflows/r-cmd-check.yml/badge.svg)](https://github.com/sahilseth/params/actions/workflows/r-cmd-check.yml)
+
 [![](http://www.r-pkg.org/badges/version/params)](https://cran.r-project.org/package=params)
 ![](http://cranlogs.r-pkg.org/badges/grand-total/params)
 
