@@ -18,7 +18,6 @@
   lst
 }
 
-#' @export
 .load_opts <- function(x, check, envir, verbose, .parse,
                        .remove_period = TRUE, ...){
 
