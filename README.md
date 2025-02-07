@@ -6,6 +6,7 @@ p a r a m s
 [![R-CMD-check.yaml](https://github.com/sahilseth/params/actions/workflows/r-cmd-check.yml/badge.svg)](https://github.com/sahilseth/params/actions/workflows/r-cmd-check.yml)
 
 [![](http://www.r-pkg.org/badges/version/params)](https://cran.r-project.org/package=params)
+
 [![](https://cranlogs.r-pkg.org/badges/params)](https://cran.r-project.org/package=params)
 
 **[sahilseth.github.io/params](http://sahilseth.com/params/)**
